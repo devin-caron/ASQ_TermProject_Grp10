@@ -23,13 +23,15 @@ namespace AircraftTransmissionSystem
         }
 
         //TODO: add test that this function calculates correct check sums
-        private static int calcChkSum() {
+        public static int calcChkSum() {
             float subCheckSum = 0.0f;
 
             subCheckSum = (altitude + pitch + bank) / 3;
 
             return (int)Math.Round(subCheckSum);
         }
+
+        
 
         //TODO: add test that determines that this function parses correctly
         private static void parseTelemetryLn(String telemetryLnStr) {
@@ -61,5 +63,13 @@ namespace AircraftTransmissionSystem
 
             return DateTime.Parse(new string(properStringFormat));
         }
+
+        public static float Accelx => accelx;
+        public static float Accely => accely;
+        public static float Accelz => accelz;
+        public static float Weight => weight;
+        public static float Altitude => altitude;
+        public static float Pitch => pitch;
+        public static float Bank => bank;
     }
 }
