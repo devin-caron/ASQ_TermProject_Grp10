@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace AircraftTransmissionSystem
 {
     class AircraftTelemetryEntry {
-        private DateTime Timestamp;
+        private DateTime timestamp;
         private float accelx = 0.0f;
         private float accely = 0.0f;
         private float accelz = 0.0f;
@@ -43,7 +43,7 @@ namespace AircraftTransmissionSystem
             //7_8_2018 19:34:3,-0.319754, -0.716176, 1.797150, 2154.670410, 1643.844116, 0.022278, 0.033622,
             String[] subStrings = telemetryLnStr.Split(',');
             
-            Timestamp = convertStringTimeToDateTime(subStrings[0]);
+            timestamp = convertStringTimeToDateTime(subStrings[0]);
             accelx = float.Parse(subStrings[1]);
             accely = float.Parse(subStrings[2]);
             accelz = float.Parse(subStrings[3]);
@@ -69,6 +69,7 @@ namespace AircraftTransmissionSystem
             return DateTime.Parse(new string(properStringFormat));
         }
 
+        public DateTime Timestamp => Timestamp;
         public float Accelx => accelx;
         public float Accely => accely;
         public float Accelz => accelz;

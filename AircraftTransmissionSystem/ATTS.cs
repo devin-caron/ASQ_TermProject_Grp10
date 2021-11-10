@@ -26,8 +26,9 @@ namespace AircraftTransmissionSystem
 
             for (int i = 0; i < numOfFiles; i++) {
                 flights.Add(readFile(filePaths[i]));
-                Console.WriteLine(flights[i].FlightName);            
-            }
+                Console.WriteLine(flights[i].FlightName);
+                Console.WriteLine(flights[i].TelemetryList.ElementAt(1).Timestamp.ToString());
+            }       
 
             Console.ReadLine();
         }
