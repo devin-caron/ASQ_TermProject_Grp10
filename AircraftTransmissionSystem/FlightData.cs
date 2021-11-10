@@ -8,10 +8,10 @@ namespace AircraftTransmissionSystem
 {
     class FlightData
     {
-        private static List<AircraftTelemetryEntry> telemetryList;
-        private static String flightName = "";
+        private List<AircraftTelemetryEntry> telemetryList = new List<AircraftTelemetryEntry>();
+        private String flightName = "";
         public FlightData(String name) {
-            flightName = name;
+            flightName = cleanName(name);
         }
 
         public AircraftTelemetryEntry getEntry(int index) {
@@ -27,8 +27,27 @@ namespace AircraftTransmissionSystem
             telemetryList.Add(entry);
         }
 
+        //TODO: Make sure this funciton can handle varying flight names
+        private String cleanName(String dirtyName) { 
+            char[] dirtyNameArray = dirtyName.ToCharArray();
+            char[] cleanNameArray = {'A','A','A','A','A','A'};
 
-        public static List<AircraftTelemetryEntry> TelemetryList => telemetryList;
-        public static string FlightName => flightName;
+            try {
+                for (int i = 0; i < dirtyName.IndexOf('.') - 1; i++) {
+                    cleanNameArray[i] = dirtyNameArray[dirtyName.LastIndexOf('\\') + i + 1];
+                }
+            }
+            catch(IndexOutOfRangeException ie) {
+               Console.WriteLine("cleanName() hit an index out of range exception!"); 
+            }
+
+            return (new String(cleanNameArray));
+        }
+
+        public List<AircraftTelemetryEntry> TelemetryList {
+            get => telemetryList;
+            set => telemetryList = value;
+        }
+        public string FlightName => flightName;
     }
 }
