@@ -69,7 +69,7 @@ namespace AircraftTransmissionSystem
             return DateTime.Parse(new string(properStringFormat));
         }
 
-        public DateTime Timestamp => Timestamp;
+        public DateTime Timestamp => timestamp;
         public float Accelx => accelx;
         public float Accely => accely;
         public float Accelz => accelz;
