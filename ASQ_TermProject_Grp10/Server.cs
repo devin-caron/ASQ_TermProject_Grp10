@@ -54,6 +54,8 @@ namespace ASQ_TermProject_Grp10
                         // Show the data on the console.  
                         Console.WriteLine("{0}", data);
 
+                        
+
                         // Echo the data back to the client.  
                         byte[] msg = Encoding.ASCII.GetBytes("<ACK>");
 
