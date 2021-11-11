@@ -58,7 +58,6 @@ namespace AircraftTransmissionSystem
             filePaths = Directory.GetFiles(flightDir); 
             int numOfFiles = filePaths.Length;
 
-            //Console.WriteLine();
 
             for (int i = 0; i < numOfFiles; i++) {
                 flights.Add(readFile(filePaths[i]));
@@ -94,10 +93,10 @@ namespace AircraftTransmissionSystem
     
         static void printMenu() {
             Console.Clear();
-            Console.WriteLine("\t\t\tAircraft Transmission System Terminal");
-            Console.WriteLine("\t\t1) Download Telemetry");
-            Console.WriteLine("\t\t2) Transmit All Flight Data");
-            Console.WriteLine("\t\t3) Test func");
+            Console.WriteLine(" === Aircraft Transmission System Terminal ===");
+            Console.WriteLine("\t1) Download Telemetry");
+            Console.WriteLine("\t2) Transmit All Flight Data");
+            Console.WriteLine("\t3) Test func");
         }
 
         static void StartTransmission() {
@@ -134,22 +133,16 @@ namespace AircraftTransmissionSystem
 
                         Console.WriteLine("[INFO] Transmitting data from flight '{0}'", flights[i].FlightName);
 
-                        for (int y = 0; y < flights[i].TelemetryList.Count; i++) {
+                        for (int y = 0; y < flights[i].TelemetryList.Count; y++) {
                             sendString(ref totalBytesSent, sender, packetize(flights[i].FlightName, flights[i].TelemetryList.ElementAt(y)));
                         }
 
                         sendString(ref totalBytesSent, sender, "<EOF>");
                     }
                     
-
-
-                    //Thread.Sleep(2000);
-
                     // Release the socket.  
                     sender.Shutdown(SocketShutdown.Both);
                     sender.Close();
-                    
-                    
 
                 }
                 catch (ArgumentNullException ane)
@@ -159,7 +152,6 @@ namespace AircraftTransmissionSystem
                 catch (SocketException se)
                 {
                     Console.WriteLine("[ERROR] ATTS could not connect to the Ground Station Terminal. Is it online?");
-                    Thread.Sleep(2000); 
                 }
                 catch (Exception e)
                 {
@@ -189,11 +181,12 @@ namespace AircraftTransmissionSystem
            
             //TODO: need to add a reliability system (if one doesn't already exist)
             /*
-            String recvStr = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-            
-            if(recvStr != "<ACK>") {
-                socket.Send(msg);
-            }*/
+				String recvStr = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+				
+				if(recvStr != "<ACK>") {
+					socket.Send(msg);
+				}            
+			*/
 
         }
 		
