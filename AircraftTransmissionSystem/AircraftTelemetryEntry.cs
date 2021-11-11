@@ -25,6 +25,7 @@ namespace AircraftTransmissionSystem
             }
 
             parseTelemetryLn(telemetryLnStr);
+            calcChkSum();
         }
 
         //TODO: add test that this function calculates correct check sums
