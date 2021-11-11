@@ -134,7 +134,7 @@ namespace AircraftTransmissionSystem
                    
                     sender.Connect(remoteEP);
 
-                    Console.WriteLine("Socket connected to {0}",
+                    Console.WriteLine("[INFO] Socket connected to {0}",
                     sender.RemoteEndPoint.ToString());
 
                     int totalBytesSent = 0;
@@ -148,9 +148,11 @@ namespace AircraftTransmissionSystem
                             sendString(ref totalBytesSent, sender, packetize(flights[i].FlightName, flights[i].TelemetryList.ElementAt(y)));
                         }
 
-                        sendString(ref totalBytesSent, sender, "<EOF>");
                     }
+                   
                     
+                    sendString(ref totalBytesSent, sender, "<EOF>");
+
                     // Release the socket.  
                     sender.Shutdown(SocketShutdown.Both);
                     sender.Close();
