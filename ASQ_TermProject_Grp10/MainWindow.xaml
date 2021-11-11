@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ASQ_TermProject_Grp10"
         mc:Ignorable="d"
-        Title="Ground Station" Height="500" Width="500">
+        Title="Ground Station" Height="500" Width="750">
     <Grid>
         
     </Grid>
