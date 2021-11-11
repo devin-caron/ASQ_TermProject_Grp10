@@ -77,7 +77,7 @@ namespace AircraftTransmissionSystem
             StringBuilder sb = new StringBuilder();
 
             sb.Append(convertDateTimeToString(timestamp) +  @",");
-            sb.Append(accelx + @"," + accely + @"," + accelz);
+            sb.Append(accelx + @"," + accely + @"," + accelz + @",");
             sb.Append(weight + @"," + altitude + @"," + pitch + @"," + bank + @",");
 
             return sb.ToString();
