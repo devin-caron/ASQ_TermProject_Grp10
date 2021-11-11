@@ -69,6 +69,21 @@ namespace AircraftTransmissionSystem
             return DateTime.Parse(new string(properStringFormat));
         }
 
+        private String convertDateTimeToString(DateTime dt) {
+            return dt.ToString("M_dd_yyyy HH:mm:ss");
+        }
+
+        //TODO: add test to verify that this funciton can make an exact replica of the string that was passed into this object's constructor (excluding the datetime field) 
+        public override String ToString() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(convertDateTimeToString(timestamp) +  @",");
+            sb.Append(accelx + @"," + accely + @"," + accelz);
+            sb.Append(weight + @"," + altitude + @"," + pitch + @"," + bank + @",");
+
+            return sb.ToString();
+        }
+
         public DateTime Timestamp => timestamp;
         public float Accelx => accelx;
         public float Accely => accely;
