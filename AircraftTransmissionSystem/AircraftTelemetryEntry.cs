@@ -70,7 +70,7 @@ namespace AircraftTransmissionSystem
         }
 
         private String convertDateTimeToString(DateTime dt) {
-            return dt.ToString("M_dd_yyyy HH:mm:ss");
+            return dt.ToString("M_d_yyyy HH:mm:s");
         }
 
         //TODO: add test to verify that this funciton can make an exact replica of the string that was passed into this object's constructor (excluding the datetime field) 
