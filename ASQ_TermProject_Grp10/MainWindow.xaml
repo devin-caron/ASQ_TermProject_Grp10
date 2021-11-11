@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="Ground Station" Height="500" Width="750">
     <Grid>
-        
+        <CheckBox x:Name="liveDataCheck" Content="Live Data" HorizontalAlignment="Left" Margin="580,56,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <DataGrid x:Name="flightDataGrid" HorizontalAlignment="Left" Height="306" Margin="54,90,0,0" VerticalAlignment="Top" Width="647"/>
+        <TextBlock HorizontalAlignment="Left" Margin="54,43,0,0" TextWrapping="Wrap" Text="FDMS" VerticalAlignment="Top"/>
+        <Button x:Name="asciiBtn" Content="Print to ASCII" HorizontalAlignment="Left" Margin="54,419,0,0" VerticalAlignment="Top" Width="109" Height="41"/>
     </Grid>
 </Window>

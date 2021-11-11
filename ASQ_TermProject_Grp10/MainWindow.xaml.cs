@@ -27,6 +27,12 @@ namespace ASQ_TermProject_Grp10
             Server s = new Server();
             s.StartListening();
 
+
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
