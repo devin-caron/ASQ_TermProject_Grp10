@@ -45,24 +45,24 @@ namespace ASQ_TermProject_Grp10
                     while (true)
                     {
                         int bytesRec = handler.Receive(bytes);
-                        data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                        data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
                         if (data.IndexOf("<EOF>") > -1)
                         {
                             break;
                         }
+
+                        // Show the data on the console.  
+                        Console.WriteLine("{0}", data);
+
+                        // Echo the data back to the client.  
+                        byte[] msg = Encoding.ASCII.GetBytes("<ACK>");
+
+                        handler.Send(msg);
                     }
 
-                    // Show the data on the console.  
-                    Console.WriteLine("Text received : {0}", data);
-
-                    // Echo the data back to the client.  
-                    byte[] msg = Encoding.ASCII.GetBytes(data);
-
-                    handler.Send(msg);
-                    handler.Shutdown(SocketShutdown.Both);
-                    handler.Close();
+                   handler.Shutdown(SocketShutdown.Both);
+                   handler.Close();
                 }
-
             }
             catch (Exception e)
             {
