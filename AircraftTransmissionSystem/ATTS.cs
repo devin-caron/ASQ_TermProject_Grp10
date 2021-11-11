@@ -13,6 +13,7 @@ namespace AircraftTransmissionSystem
 {
     class ATTS {
         private static List<FlightData> flights = new List<FlightData>();
+        private static bool bDataRetrieved = false;
 
         static void Main(string[] args) {
            int menuOption = 0; 
@@ -36,9 +37,16 @@ namespace AircraftTransmissionSystem
                     case 1:
                         Console.Clear();
                         readTelemetry();
+                        bDataRetrieved = true;
                         break;
                     case 2:
                         Console.Clear();
+                        if (!bDataRetrieved) {
+                            Console.WriteLine("[ERROR] There is no data to transmit! Have you downloaded the data yet?");
+                            Thread.Sleep(2500);
+                            continue;
+                        }
+
                         StartTransmission();
                         break;
                     case 3:
@@ -148,20 +156,24 @@ namespace AircraftTransmissionSystem
                 catch (ArgumentNullException ane)
                 {
                     Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
+                    Thread.Sleep(2500);
                 }
                 catch (SocketException se)
                 {
                     Console.WriteLine("[ERROR] ATTS could not connect to the Ground Station Terminal. Is it online?");
+                    Thread.Sleep(2500);
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                    Thread.Sleep(2500);
                 }
 
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+                Thread.Sleep(2500);
             }
         }
 
