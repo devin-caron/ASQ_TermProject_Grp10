@@ -22,19 +22,79 @@ namespace ASQ_TermProject_Grp10
     public partial class MainWindow : Window
     {
 
+        public class FlightData
+        {
+            public DateTime Timestamp { get; set; }
+            public int AccelX { get; set; }
+            public double AccelY { get; set; }
+            public double AccelZ { get; set; }
+            public double Weight { get; set; }
+            public double Altitude { get; set; }
+            public double Pitch { get; set; }
+            public double Bank { get; set; }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
 
+            Server s = new Server();
+            //s.StartListening();
+            List<FlightData> flightData = new List<FlightData>();
+            flightData.Add(new FlightData()
+            {
+                Timestamp = new DateTime(1996, 07, 04),
+                AccelX = 1,
+                AccelY = 1,
+                AccelZ = 1,
+                Weight = 1,
+                Altitude = 1,
+                Pitch = 1,
+                Bank = 1
+
+            });
+
+            liveDataGrid.ItemsSource =flightData;
 
 
+            flightData.Add(new FlightData()
+            {
+                Timestamp = new DateTime(1996, 07, 04),
+                AccelX = 2,
+                AccelY = 1,
+                AccelZ = 1,
+                Weight = 1,
+                Altitude = 1,
+                Pitch = 1,
+                Bank = 1
+
+            });
+
+            liveDataGrid.ItemsSource = flightData;
+            // When connected start printing the data as received
+
+
+
+
+            // send data to database
 
 
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void liveDataCheck_Checked(object sender, RoutedEventArgs e)
         {
-           
+            if (liveDataCheck.IsChecked == true)
+            {
+                // Restart Live Data
+                
+
+            }
+            else
+            {
+                // Stop Live Data
+
+            }
+
         }
     }
 }
