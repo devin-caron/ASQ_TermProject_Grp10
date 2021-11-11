@@ -53,6 +53,8 @@ namespace AircraftTransmissionSystem
 						Console.Clear();
 						packetize(flights[1].FlightName, flights[1].TelemetryList.ElementAt(0));
                         break;
+                    case 4:
+                        return;
                     default:
                         continue;
                 }
@@ -105,6 +107,7 @@ namespace AircraftTransmissionSystem
             Console.WriteLine("\t1) Download Telemetry");
             Console.WriteLine("\t2) Transmit All Flight Data");
             Console.WriteLine("\t3) Test func");
+            Console.WriteLine("\t4) Exit");
         }
 
         static void StartTransmission() {
