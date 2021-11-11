@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-
+using System.Threading;
 
 namespace AircraftTransmissionSystem
 {
@@ -29,13 +29,17 @@ namespace AircraftTransmissionSystem
                 // Connect the socket to the remote endpoint. Catch any errors.  
                 try
                 {
+                   
                     sender.Connect(remoteEP);
 
                     Console.WriteLine("Socket connected to {0}",
-                        sender.RemoteEndPoint.ToString());
+                    sender.RemoteEndPoint.ToString());
 
+                    
+                    //Here to
+                    String tmpData = "Just a text!";
                     // Encode the data string into a byte array.  
-                    byte[] msg = Encoding.ASCII.GetBytes("This is a test<EOF>");
+                    byte[] msg = Encoding.ASCII.GetBytes(tmpData + "<EOF>");
 
                     // Send the data through the socket.  
                     int bytesSent = sender.Send(msg);
@@ -45,9 +49,13 @@ namespace AircraftTransmissionSystem
                     Console.WriteLine("Echoed test = {0}",
                         Encoding.ASCII.GetString(bytes, 0, bytesRec));
 
+                    //Thread.Sleep(2000);
+                   
                     // Release the socket.  
                     sender.Shutdown(SocketShutdown.Both);
                     sender.Close();
+                    
+                    
 
                 }
                 catch (ArgumentNullException ane)
