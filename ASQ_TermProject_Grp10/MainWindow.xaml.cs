@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AircraftTransmissionSystem;
 
 namespace ASQ_TermProject_Grp10
 {
@@ -39,7 +40,9 @@ namespace ASQ_TermProject_Grp10
             InitializeComponent();
 
             Server s = new Server();
-            //s.StartListening();
+
+            //s.RecieveTransmission();
+
             List<FlightData> flightData = new List<FlightData>();
             flightData.Add(new FlightData()
             {
