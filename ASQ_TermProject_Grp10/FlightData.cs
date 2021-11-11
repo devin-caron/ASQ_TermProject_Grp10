@@ -14,6 +14,10 @@ namespace AircraftTransmissionSystem
             flightName = cleanName(name);
         }
 
+        public FlightData()
+        {
+        }
+
         public AircraftTelemetryEntry getEntry(int index) {
             if (index > telemetryList.Count) {
                 AircraftTelemetryEntry ret = null;

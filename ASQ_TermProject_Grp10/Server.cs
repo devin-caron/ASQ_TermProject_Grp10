@@ -12,7 +12,7 @@ namespace ASQ_TermProject_Grp10
         // Incoming data from the client.  
         public static string data = null;
 
-        public void  RecieveTransmission() {
+        public void  RecieveTransmission(ref List<AircraftTelemetryEntry> list, ref bool newListInsert) {
             // Data buffer for incoming data.  
             byte[] bytes = new Byte[1024];
 
@@ -70,11 +70,18 @@ namespace ASQ_TermProject_Grp10
 
                             handler.Send(msg);
 
+
+                            //Console.WriteLine("{0}", entry.ToString());
+                            list.Add(entry);
+
+                            newListInsert = true;
                         }
+
+
                         
                         
-                        Console.WriteLine("{0}", entry.ToString());
                         // this is where devin and dusan will figure out how to display the entry
+
                     }
 
                    handler.Shutdown(SocketShutdown.Both);

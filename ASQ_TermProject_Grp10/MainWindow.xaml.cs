@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AircraftTransmissionSystem;
+using System.Threading;
 
 namespace ASQ_TermProject_Grp10
 {
@@ -22,18 +23,10 @@ namespace ASQ_TermProject_Grp10
     /// </summary>
     public partial class MainWindow : Window
     {
+        private volatile bool runThread = false;
+        private volatile bool newListInsert = false;
 
-        public class FlightData
-        {
-            public DateTime Timestamp { get; set; }
-            public int AccelX { get; set; }
-            public double AccelY { get; set; }
-            public double AccelZ { get; set; }
-            public double Weight { get; set; }
-            public double Altitude { get; set; }
-            public double Pitch { get; set; }
-            public double Bank { get; set; }
-        }
+        private List<AircraftTelemetryEntry> listTest = new List<AircraftTelemetryEntry>();
 
         public MainWindow()
         {
@@ -41,41 +34,16 @@ namespace ASQ_TermProject_Grp10
 
             Server s = new Server();
 
-            //s.RecieveTransmission();
-
-            List<FlightData> flightData = new List<FlightData>();
-            flightData.Add(new FlightData()
-            {
-                Timestamp = new DateTime(1996, 07, 04),
-                AccelX = 1,
-                AccelY = 1,
-                AccelZ = 1,
-                Weight = 1,
-                Altitude = 1,
-                Pitch = 1,
-                Bank = 1
-
-            });
-
-            liveDataGrid.ItemsSource =flightData;
+            runThread = true;
 
 
-            flightData.Add(new FlightData()
-            {
-                Timestamp = new DateTime(1996, 07, 04),
-                AccelX = 2,
-                AccelY = 1,
-                AccelZ = 1,
-                Weight = 1,
-                Altitude = 1,
-                Pitch = 1,
-                Bank = 1
+            s.RecieveTransmission(ref listTest, ref newListInsert);
 
-            });
 
-            liveDataGrid.ItemsSource = flightData;
+
             // When connected start printing the data as received
-
+            Thread t = new Thread(new ThreadStart(InsertDataItem));
+            t.Start();
 
 
 
@@ -98,6 +66,27 @@ namespace ASQ_TermProject_Grp10
 
             }
 
+        }
+
+        public void InsertDataItem()
+        {
+            if (runThread)
+            {
+                
+
+                if(newListInsert)
+                {
+                    liveDataGrid.Items.Clear();
+
+                    for (int i = 0; i < listTest.Count; i++)
+                    {
+                        liveDataGrid.Items.Add(listTest[i]);
+                    }   
+                }
+            }
+
+
+            //liveDataGrid.ItemsSource = 
         }
     }
 }

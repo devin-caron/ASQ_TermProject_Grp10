@@ -10,7 +10,7 @@
 
         <CheckBox x:Name="liveDataCheck" Content="Live Data" HorizontalAlignment="Left" Margin="615,47,0,0" VerticalAlignment="Top" Checked="liveDataCheck_Checked" IsChecked="True"/>
         <TextBlock HorizontalAlignment="Left" Margin="54,43,0,0" TextWrapping="Wrap" Text="FDMS" VerticalAlignment="Top"/>
-        <DataGrid Height="276" AutoGenerateColumns="True" HorizontalAlignment="Left" Margin="54,104,0,0" x:Name="liveDataGrid" VerticalAlignment="Top" Width="628"/>
+        <DataGrid x:FieldModifier="public" Height="276" AutoGenerateColumns="True" HorizontalAlignment="Left" Margin="54,104,0,0" x:Name="liveDataGrid" VerticalAlignment="Top" Width="628"/>
         <Button x:Name="asciiBtn" Content="Print to ASCII" HorizontalAlignment="Left" Margin="54,419,0,0" VerticalAlignment="Top" Width="109" Height="41"/>
     </Grid>
 </Window>
