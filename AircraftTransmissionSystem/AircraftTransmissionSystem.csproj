@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AircraftTelemetryEntry.cs" />
     <Compile Include="ATTS.cs" />
+    <Compile Include="Client.cs" />
     <Compile Include="FlightData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

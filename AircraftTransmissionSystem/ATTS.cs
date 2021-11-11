@@ -13,6 +13,9 @@ namespace AircraftTransmissionSystem
 
         static void Main(string[] args) {
             readTelemetry();
+
+            Client c = new Client();
+            c.StartClient();
         }
 
         static void readTelemetry() {

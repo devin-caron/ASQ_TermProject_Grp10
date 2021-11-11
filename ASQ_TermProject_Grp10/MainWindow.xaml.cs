@@ -23,6 +23,10 @@ namespace ASQ_TermProject_Grp10
         public MainWindow()
         {
             InitializeComponent();
+
+            Server s = new Server();
+            s.StartListening();
+
         }
     }
 }
