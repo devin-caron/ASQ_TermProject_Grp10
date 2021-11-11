@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,19 +21,20 @@ namespace ASQ_TermProject_Grp10
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
 
-            Server s = new Server();
-            s.StartListening();
+
+
 
 
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-
+           
         }
     }
 }
