@@ -76,9 +76,6 @@ namespace ASQ_TermProject_Grp10
 
                             newListInsert = true;
                         }
-
-
-                        
                         
                         // this is where devin and dusan will figure out how to display the entry
 

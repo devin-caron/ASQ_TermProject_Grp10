@@ -1,20 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using AircraftTransmissionSystem;
 using System.Threading;
+using System.Net;
+using System.Net.Sockets;
 
 namespace ASQ_TermProject_Grp10
 {
@@ -32,12 +23,15 @@ namespace ASQ_TermProject_Grp10
         {
             InitializeComponent();
 
-            Server s = new Server();
-
             runThread = true;
 
+            Server s = new Server();
 
-            s.RecieveTransmission(ref listTest, ref newListInsert);
+
+            Thread thread = new Thread(() => s.RecieveTransmission(ref listTest, ref newListInsert));
+            thread.Start();
+
+            //s.RecieveTransmission(ref listTest, ref newListInsert);
 
 
 
@@ -70,10 +64,9 @@ namespace ASQ_TermProject_Grp10
 
         public void InsertDataItem()
         {
+            Console.WriteLine("inside");
             if (runThread)
             {
-                
-
                 if(newListInsert)
                 {
                     liveDataGrid.Items.Clear();
