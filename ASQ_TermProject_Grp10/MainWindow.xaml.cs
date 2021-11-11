@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,6 @@ namespace ASQ_TermProject_Grp10
             public double Pitch { get; set; }
             public double Bank { get; set; }
         }
-
 
         public MainWindow()
         {
@@ -77,7 +77,6 @@ namespace ASQ_TermProject_Grp10
 
 
             // send data to database
-
 
 
         }
