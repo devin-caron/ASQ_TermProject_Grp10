@@ -13,6 +13,26 @@ namespace AircraftTransmissionSystem
 
         static void Main(string[] args) {
             readTelemetry();
+            
+            /*
+                    present menu
+                    options 
+                1) Connect to Ground Station Terminal
+                    * while loop that will sit and wait for a connection to be established 
+                    * once connection is established user will be informed the connection has been established
+                    * sleep 1 second
+                    * the program will return to main menu
+                    * menu will now reflect the connection status ()
+                2) Transmit All Flight Data
+                3?) Transmit Single Flight Data
+
+            Example
+
+                        Aircraft Transmission System Terminal (UN/CONNECTED)
+                            1) Connect to Ground Station Terminal
+                            2) Transmit All Flight Data
+
+            */
         }
 
         static void readTelemetry() {
