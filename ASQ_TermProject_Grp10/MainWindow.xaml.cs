@@ -118,7 +118,6 @@ namespace ASQ_TermProject_Grp10
 
                         AircraftTelemetryEntry entry = new AircraftTelemetryEntry(splitPacket[1]);
 
-
                         if (entry.calcChkSum() == int.Parse(splitPacket[2]))
                         {
                             //Sends acknowledgment data to ATTS   
@@ -145,7 +144,6 @@ namespace ASQ_TermProject_Grp10
             {
                 Console.WriteLine(e.ToString());
             }
-
         }
 
         private String[] splitData(String data)
@@ -155,8 +153,6 @@ namespace ASQ_TermProject_Grp10
             return new string[] { subStrings[0], subStrings[1], subStrings[2] };
         }
 
-
-
         private void InsertDataItem()
         {
             Console.WriteLine("inside");
@@ -165,11 +161,10 @@ namespace ASQ_TermProject_Grp10
             {
                 // your code here.
                 testTxt.Text = "Working";
+
+                // display data
+
             });
-            
-
-            // display data
-
         }
     }
 }
