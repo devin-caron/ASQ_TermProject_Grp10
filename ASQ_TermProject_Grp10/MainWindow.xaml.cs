@@ -116,6 +116,10 @@ namespace ASQ_TermProject_Grp10
                             UpdateDataGrid();
 
                             // Update database function call
+                            DbManager dbm = new DbManager();
+                            dbm.InserAttitudeParameters(entry.TailCode, entry.Timestamp.ToString(), entry.Altitude, entry.Pitch, entry.Bank);
+                            dbm.InsertGForceParameters(entry.TailCode, entry.Timestamp.ToString(), entry.Accelx, entry.Accely, entry.Accelz, entry.Weight);
+                        
                         }
                     }
 
