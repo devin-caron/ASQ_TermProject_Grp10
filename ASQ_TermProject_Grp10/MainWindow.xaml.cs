@@ -7,6 +7,7 @@ using System.Threading;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
+using System.Linq;
 
 namespace ASQ_TermProject_Grp10
 {
@@ -163,24 +164,10 @@ namespace ASQ_TermProject_Grp10
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            //string searchValue = textBox1.Text;
+            string searchValue = dataSearch.Text;
+            var filtered = listTest.Where(flightData => flightData.Accelx.ToString().StartsWith(dataSearch.Text));
 
-            //dgvProjects.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            //try
-            //{
-            //    foreach (DataGridViewRow row in dgvProjects.Rows)
-            //    {
-            //        if (row.Cells[2].Value.ToString().Equals(searchValue))
-            //        {
-            //            row.Selected = true;
-            //            break;
-            //        }
-            //    }
-            //}
-            //catch (Exception exc)
-            //{
-            //    MessageBox.Show(exc.Message);
-            //}
+            liveDataGrid.ItemsSource = filtered;
         }
     }
 }

@@ -43,11 +43,10 @@
                     Content="Search" 
                     FontSize="20"   
                     Grid.Column="1"
-                    Margin="260,23,380,22.2"
+                    Margin="260,18,380,17.2"
                     Background="White"
                     FontFamily="Segoe UI Semibold"
-                    Width="80" 
-                    Height="30" Click="searchBtn_Click" 
+                    Width="80" Click="searchBtn_Click" 
                     />
 
             <DataGrid x:FieldModifier="public" AutoGenerateColumns="True" x:Name="liveDataGrid"
@@ -80,7 +79,7 @@
                        Margin="0,21,35,22.2"
                        FontFamily="Segoe UI Semibold"
                        />
-            
+
             <Button x:Name="liveDataBtn" 
                     Content="LIVE DATA" 
                     VerticalAlignment="Center"
