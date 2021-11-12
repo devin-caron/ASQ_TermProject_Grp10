@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Linq;
+using Microsoft.Win32;
 
 namespace ASQ_TermProject_Grp10
 {
@@ -96,17 +97,15 @@ namespace ASQ_TermProject_Grp10
 
                             listTest.Add(entry);
                         }
-
-                        if(liveData) 
-                        {
-                            UpdateDataGrid();
-                            
-                            // update database function call
-                        }
                     }
 
+                    if (liveData)
+                    {
+                        UpdateDataGrid();
 
-                    UpdateDataGrid();
+                        // update database function call
+                    }
+
                     handler.Shutdown(SocketShutdown.Both);
                     handler.Close();
                 }
@@ -134,13 +133,25 @@ namespace ASQ_TermProject_Grp10
 
         private void AsciiBtn_Click(object sender, RoutedEventArgs e)
         {
-            using (TextWriter tw = new StreamWriter("Aircraft Telemetry.txt"))
+
+            SaveFileDialog save = new SaveFileDialog();
+
+            save.FileName = "AircraftData.txt";
+
+            save.Filter = "Text File | *.txt";
+
+            if (save.ShowDialog() == true)
             {
+                StreamWriter writer = new StreamWriter(save.OpenFile());
+
                 foreach (var item in listTest)
                 {
-                    tw.WriteLine(string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}", item.Timestamp, item.Accelx.ToString(), item.Accely.ToString(), item.Accelz.ToString(),
+                    writer.WriteLine(string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}", item.Timestamp, item.Accelx.ToString(), item.Accely.ToString(), item.Accelz.ToString(),
                         item.Weight.ToString(), item.Altitude.ToString(), item.Pitch.ToString(), item.Bank.ToString()));
                 }
+
+                writer.Dispose();
+                writer.Close();
             }
         }
 
