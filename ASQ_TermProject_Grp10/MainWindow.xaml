@@ -40,16 +40,8 @@
                      Grid.Column="1" Background="White" FontSize="24"
                      />
 
-            <CheckBox x:Name="liveDataCheck" 
-                      Content="Live Data"  
-                      FontSize="24"
-                      VerticalContentAlignment="Center"
-                      HorizontalAlignment="Right"
-                      Margin="15"
-                      Grid.Column="1" Foreground="White" IsChecked="True" Click="liveDataCheck_Checked" 
-                      />
             <DataGrid x:FieldModifier="public" AutoGenerateColumns="True" x:Name="liveDataGrid"
-                HorizontalAlignment="Right"
+                      HorizontalAlignment="Right"
                       VerticalContentAlignment="Top"
                       Width="679"
                       Grid.Column="1"
@@ -68,6 +60,29 @@
                     Background="White" 
                     FontSize="22" 
                     FontFamily="Segoe UI Semibold" Click="asciiBtn_Click"/>
+
+            <TextBlock x:Name="liveTxt" Text="ON"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       Foreground="White"
+                       FontSize="24"   
+                       Grid.Column="1"
+                       Margin="0,21,35,22.2"
+                       FontFamily="Segoe UI Semibold"
+                       />
+            
+            <Button x:Name="liveDataBtn" 
+                    Content="LIVE DATA" 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    FontSize="24"   
+                    Grid.Column="1"
+                    Margin="0,18,95,22.2" Click="liveDataBtn_Click"
+                    Background="White"
+                    FontFamily="Segoe UI Semibold"
+                    Width="169" 
+                    Height="41" 
+                    />
 
         </Grid>
     </Border>

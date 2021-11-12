@@ -15,18 +15,16 @@ namespace ASQ_TermProject_Grp10
     /// </summary>
     public partial class MainWindow : Window
     {
-        private volatile bool runThread = false;
         private volatile bool liveData = true;
-
         private List<AircraftTelemetryEntry> listTest = new List<AircraftTelemetryEntry>();
-
         private Thread listener;
+
+        // Incoming data from the client.  
+        public static string data = null;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            runThread = true;
 
             listener = new Thread(new ParameterizedThreadStart(RecieveTransmission));
             listener.Start();
@@ -37,26 +35,6 @@ namespace ASQ_TermProject_Grp10
             // send data to database
 
          }
-
-        private void liveDataCheck_Checked(object sender, RoutedEventArgs e)
-        {
-            if (liveDataCheck.IsChecked == true)
-            {
-                // Restart Live Data
-                liveData = true;
-                Console.WriteLine("True");
-            }
-            else
-            {
-                // Stop Live Data
-                liveData = false;
-                Console.WriteLine("False");
-            }
-
-        }
-
-        // Incoming data from the client.  
-        public static string data = null;
 
         private void RecieveTransmission(object o)
         {
@@ -160,6 +138,22 @@ namespace ASQ_TermProject_Grp10
                     tw.WriteLine(string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}", item.Timestamp, item.Accelx.ToString(), item.Accely.ToString(), item.Accelz.ToString(),
                         item.Weight.ToString(), item.Altitude.ToString(), item.Pitch.ToString(), item.Bank.ToString()));
                 }
+            }
+        }
+
+        private void liveDataBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (liveData == true)
+            {
+                // Stop Live Data
+                liveData = false;
+                liveTxt.Text = "OFF";
+            }
+            else
+            {
+                // Start Live Data
+                liveData = true;
+                liveTxt.Text = "ON";
             }
         }
     }
