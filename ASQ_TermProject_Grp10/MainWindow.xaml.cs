@@ -6,6 +6,7 @@ using AircraftTransmissionSystem;
 using System.Threading;
 using System.Net;
 using System.Net.Sockets;
+using System.IO;
 
 namespace ASQ_TermProject_Grp10
 {
@@ -43,11 +44,13 @@ namespace ASQ_TermProject_Grp10
             {
                 // Restart Live Data
                 liveData = true;
+                Console.WriteLine("True");
             }
             else
             {
                 // Stop Live Data
                 liveData = false;
+                Console.WriteLine("False");
             }
 
         }
@@ -146,6 +149,18 @@ namespace ASQ_TermProject_Grp10
             {
                 liveDataGrid.ItemsSource = listTest; 
             });
+        }
+
+        private void asciiBtn_Click(object sender, RoutedEventArgs e)
+        {
+            using (TextWriter tw = new StreamWriter("Aircraft Telemetry.txt"))
+            {
+                foreach (var item in listTest)
+                {
+                    tw.WriteLine(string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}", item.Timestamp, item.Accelx.ToString(), item.Accely.ToString(), item.Accelz.ToString(),
+                        item.Weight.ToString(), item.Altitude.ToString(), item.Pitch.ToString(), item.Bank.ToString()));
+                }
+            }
         }
     }
 }

@@ -46,7 +46,7 @@
                       VerticalContentAlignment="Center"
                       HorizontalAlignment="Right"
                       Margin="15"
-                      Grid.Column="1" Foreground="White" 
+                      Grid.Column="1" Foreground="White" IsChecked="True" Click="liveDataCheck_Checked" 
                       />
             <DataGrid x:FieldModifier="public" AutoGenerateColumns="True" x:Name="liveDataGrid"
                 HorizontalAlignment="Right"
@@ -67,7 +67,7 @@
                     Grid.Row="1" 
                     Background="White" 
                     FontSize="22" 
-                    FontFamily="Segoe UI Semibold"/>
+                    FontFamily="Segoe UI Semibold" Click="asciiBtn_Click"/>
 
         </Grid>
     </Border>
