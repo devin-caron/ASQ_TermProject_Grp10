@@ -59,7 +59,7 @@
                     Grid.Row="1" 
                     Background="White" 
                     FontSize="22" 
-                    FontFamily="Segoe UI Semibold" Click="asciiBtn_Click"/>
+                    FontFamily="Segoe UI Semibold" Click="AsciiBtn_Click"/>
 
             <TextBlock x:Name="liveTxt" Text="ON"
                        VerticalAlignment="Center"
@@ -77,7 +77,7 @@
                     HorizontalAlignment="Right"
                     FontSize="24"   
                     Grid.Column="1"
-                    Margin="0,18,95,22.2" Click="liveDataBtn_Click"
+                    Margin="0,18,95,22.2" Click="LiveDataBtn_Click"
                     Background="White"
                     FontFamily="Segoe UI Semibold"
                     Width="169" 

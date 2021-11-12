@@ -129,7 +129,7 @@ namespace ASQ_TermProject_Grp10
             });
         }
 
-        private void asciiBtn_Click(object sender, RoutedEventArgs e)
+        private void AsciiBtn_Click(object sender, RoutedEventArgs e)
         {
             using (TextWriter tw = new StreamWriter("Aircraft Telemetry.txt"))
             {
@@ -141,7 +141,7 @@ namespace ASQ_TermProject_Grp10
             }
         }
 
-        private void liveDataBtn_Click(object sender, RoutedEventArgs e)
+        private void LiveDataBtn_Click(object sender, RoutedEventArgs e)
         {
             if (liveData == true)
             {
