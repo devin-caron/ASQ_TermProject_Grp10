@@ -19,11 +19,16 @@ namespace ASQ_TermProject_Grp10
 
         private List<AircraftTelemetryEntry> listTest = new List<AircraftTelemetryEntry>();
 
+        private Thread listener;
+
         public MainWindow()
         {
             InitializeComponent();
 
             runThread = true;
+
+            listener = new Thread(new ParameterizedThreadStart(RecieveTransmission));
+            listener.Start();
 
             //Server s = new Server();
 
@@ -39,7 +44,7 @@ namespace ASQ_TermProject_Grp10
 
             // send data to database
 
-            RecieveTransmission(ref listTest, ref newListInsert);
+            //RecieveTransmission(ref listTest, ref newListInsert);
         }
 
         private void liveDataCheck_Checked(object sender, RoutedEventArgs e)
@@ -60,7 +65,7 @@ namespace ASQ_TermProject_Grp10
         // Incoming data from the client.  
         public static string data = null;
 
-        private void RecieveTransmission(ref List<AircraftTelemetryEntry> list, ref bool newListInsert)
+        private void RecieveTransmission(object o)
         {
             // Data buffer for incoming data.  
             byte[] bytes = new Byte[1024];
@@ -156,19 +161,15 @@ namespace ASQ_TermProject_Grp10
         {
             Console.WriteLine("inside");
 
-            testTxt.Text = "Working";
-            //while (runThread)
-            //{
-            //if(newListInsert)
-            //{
-            //liveDataGrid.Items.Clear();
+            this.Dispatcher.Invoke(() =>
+            {
+                // your code here.
+                testTxt.Text = "Working";
+            });
+            
 
-            //for (int i = 0; i < listTest.Count; i++)
-            //{
-            //liveDataGrid.Items.Add(listTest[i]);
-            //}   
-            // }
-            //}
+            // display data
+
         }
     }
 }
