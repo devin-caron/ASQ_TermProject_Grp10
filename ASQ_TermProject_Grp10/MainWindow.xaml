@@ -8,7 +8,7 @@
         Title="Ground Station" Height="500" Width="750">
     <Grid>
 
-        <CheckBox x:Name="liveDataCheck" Content="Live Data" HorizontalAlignment="Left" Margin="615,47,0,0" VerticalAlignment="Top" Checked="liveDataCheck_Checked" IsChecked="True"/>
+        <CheckBox x:Name="liveDataCheck" Content="Live Data" HorizontalAlignment="Left" Margin="615,47,0,0" VerticalAlignment="Top" Checked="liveDataCheck_Checked" IsChecked="false"/>
         <TextBlock HorizontalAlignment="Left" Margin="54,43,0,0" TextWrapping="Wrap" Text="FDMS" VerticalAlignment="Top"/>
         <DataGrid x:FieldModifier="public" AutoGenerateColumns="True" HorizontalAlignment="Left" Margin="27,0,0,66" x:Name="liveDataGrid" Width="687" Height="298" VerticalAlignment="Bottom"/>
         <Button x:Name="asciiBtn" Content="Print to ASCII" HorizontalAlignment="Left" Margin="54,419,0,0" VerticalAlignment="Top" Width="109" Height="41"/>
