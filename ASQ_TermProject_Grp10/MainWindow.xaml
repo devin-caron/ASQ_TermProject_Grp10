@@ -5,13 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ASQ_TermProject_Grp10"
         mc:Ignorable="d"
-        Title="Ground Station" Height="500" Width="750">
-    <Grid>
+        Title="Ground Station" Height="600" Width="920"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        >
 
-        <CheckBox x:Name="liveDataCheck" Content="Live Data" HorizontalAlignment="Left" Margin="615,47,0,0" VerticalAlignment="Top" Checked="liveDataCheck_Checked" IsChecked="false"/>
-        <TextBlock HorizontalAlignment="Left" Margin="54,43,0,0" TextWrapping="Wrap" Text="FDMS" VerticalAlignment="Top"/>
-        <DataGrid x:FieldModifier="public" AutoGenerateColumns="True" HorizontalAlignment="Left" Margin="27,0,0,66" x:Name="liveDataGrid" Width="687" Height="298" VerticalAlignment="Bottom"/>
-        <Button x:Name="asciiBtn" Content="Print to ASCII" HorizontalAlignment="Left" Margin="54,419,0,0" VerticalAlignment="Top" Width="109" Height="41"/>
-        <TextBox x:Name="testTxt" HorizontalAlignment="Left" Height="23" Margin="433,59,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-    </Grid>
+    <Border Background="#FF2D2D30"
+            CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="FDMS"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Foreground="White"
+                       FontSize="36"   
+                       />
+
+            <TextBox Width="250"
+                     Height="40"
+                     VerticalContentAlignment="Center"
+                     HorizontalAlignment="Left"
+                     Margin="5"
+                     Grid.Column="1" Background="White" FontSize="24"
+                     />
+
+            <CheckBox x:Name="liveDataCheck" 
+                      Content="Live Data"  
+                      FontSize="24"
+                      VerticalContentAlignment="Center"
+                      HorizontalAlignment="Right"
+                      Margin="15"
+                      Grid.Column="1" Foreground="White" 
+                      />
+            <DataGrid x:FieldModifier="public" AutoGenerateColumns="True" x:Name="liveDataGrid"
+                HorizontalAlignment="Right"
+                      VerticalContentAlignment="Top"
+                      Width="679"
+                      Grid.Column="1"
+                      Background="White" Grid.Row="1" Margin="0,0,36,76"
+                      />
+            <Button
+                    x:Name="asciiBtn" 
+                    Content="Print to ASCII" 
+                    HorizontalAlignment="Left" 
+                    Margin="6,466,0,0" 
+                    VerticalAlignment="Top" 
+                    Width="169" 
+                    Height="41" 
+                    Grid.Column="1" 
+                    Grid.Row="1" 
+                    Background="White" 
+                    FontSize="22" 
+                    FontFamily="Segoe UI Semibold"/>
+
+        </Grid>
+    </Border>
 </Window>
