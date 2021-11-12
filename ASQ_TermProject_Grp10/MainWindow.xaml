@@ -32,13 +32,23 @@
                        FontSize="36"   
                        />
 
-            <TextBox Width="250"
+            <TextBox x:Name="dataSearch" Width="250"
                      Height="40"
                      VerticalContentAlignment="Center"
                      HorizontalAlignment="Left"
                      Margin="5"
                      Grid.Column="1" Background="White" FontSize="24"
                      />
+            <Button x:Name="searchBtn" 
+                    Content="Search" 
+                    FontSize="20"   
+                    Grid.Column="1"
+                    Margin="260,23,380,22.2" Click="LiveDataBtn_Click"
+                    Background="White"
+                    FontFamily="Segoe UI Semibold"
+                    Width="80" 
+                    Height="30" 
+                    />
 
             <DataGrid x:FieldModifier="public" AutoGenerateColumns="True" x:Name="liveDataGrid"
                       HorizontalAlignment="Right"

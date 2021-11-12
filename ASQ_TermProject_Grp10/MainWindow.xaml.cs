@@ -26,6 +26,9 @@ namespace ASQ_TermProject_Grp10
         {
             InitializeComponent();
 
+            dataSearch.IsReadOnly = true;
+            searchBtn.IsEnabled = false;
+
             listener = new Thread(new ParameterizedThreadStart(RecieveTransmission));
             listener.Start();
 
@@ -147,12 +150,16 @@ namespace ASQ_TermProject_Grp10
             {
                 // Stop Live Data
                 liveData = false;
+                dataSearch.IsReadOnly = false;
+                searchBtn.IsEnabled = true;
                 liveTxt.Text = "OFF";
             }
             else
             {
                 // Start Live Data
                 liveData = true;
+                dataSearch.IsReadOnly = true;
+                searchBtn.IsEnabled = false;
                 liveTxt.Text = "ON";
             }
         }
