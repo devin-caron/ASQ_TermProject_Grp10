@@ -15,7 +15,7 @@ namespace ASQ_TermProject_Grp10
     public partial class MainWindow : Window
     {
         private volatile bool runThread = false;
-        private volatile bool newListInsert = false;
+        private volatile bool liveData = true;
 
         private List<AircraftTelemetryEntry> listTest = new List<AircraftTelemetryEntry>();
 
@@ -33,31 +33,21 @@ namespace ASQ_TermProject_Grp10
             //Server s = new Server();
 
 
-            //Thread thread = new Thread(() => RecieveTransmission(ref listTest, ref newListInsert));
-            //thread.Start();
-
-            //s.RecieveTransmission(ref listTest, ref newListInsert);
-
-            // When connected start printing the data as received
-            //Thread t = new Thread(new ThreadStart(InsertDataItem));
-            //t.Start();
-
             // send data to database
 
-            //RecieveTransmission(ref listTest, ref newListInsert);
-        }
+         }
 
         private void liveDataCheck_Checked(object sender, RoutedEventArgs e)
         {
             if (liveDataCheck.IsChecked == true)
             {
                 // Restart Live Data
-
+                liveData = true;
             }
             else
             {
                 // Stop Live Data
-
+                liveData = false;
             }
 
         }
@@ -117,7 +107,7 @@ namespace ASQ_TermProject_Grp10
 
                         String[] splitPacket = data.Split('|');
 
-                        AircraftTelemetryEntry entry = new AircraftTelemetryEntry(splitPacket[1]);
+                        AircraftTelemetryEntry entry = new AircraftTelemetryEntry(splitPacket[1], splitPacket[0]);
 
                         if (entry.calcChkSum() == int.Parse(splitPacket[2]))
                         {
@@ -126,16 +116,13 @@ namespace ASQ_TermProject_Grp10
                             handler.Send(msg);
 
                             listTest.Add(entry);
-                            // print data here
-                            //Console.WriteLine("GOT A MESSAGE!");
-
-
-
-                            //newListInsert = true;
                         }
                     }
 
-                    InsertDataItem();
+                    if(liveData) {
+                        UpdateDataGrid();
+                    }
+
                     handler.Shutdown(SocketShutdown.Both);
                     handler.Close();
                 }
@@ -153,17 +140,11 @@ namespace ASQ_TermProject_Grp10
             return new string[] { subStrings[0], subStrings[1], subStrings[2] };
         }
 
-        private void InsertDataItem()
+        private void UpdateDataGrid()
         {
-            //Console.WriteLine("inside");
-
             this.Dispatcher.Invoke(() =>
             {
-                // your code here.
-                //testTxt.Text += entry.ToString();
                 liveDataGrid.ItemsSource = listTest; 
-                // display data
-
             });
         }
     }
