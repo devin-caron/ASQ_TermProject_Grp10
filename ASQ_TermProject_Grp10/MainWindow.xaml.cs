@@ -81,6 +81,7 @@ namespace ASQ_TermProject_Grp10
             Socket listener = new Socket(ipAddress.AddressFamily,
                 SocketType.Stream, ProtocolType.Tcp);
 
+
             // Bind the socket to the local endpoint and
             // listen for incoming connections.  
             try
@@ -124,18 +125,17 @@ namespace ASQ_TermProject_Grp10
                             byte[] msg = Encoding.ASCII.GetBytes("<ACK>");
                             handler.Send(msg);
 
-                            //list.Add(entry);
-
+                            listTest.Add(entry);
                             // print data here
-                            Console.WriteLine("GOT A MESSAGE!");
+                            //Console.WriteLine("GOT A MESSAGE!");
 
-                            InsertDataItem();
 
 
                             //newListInsert = true;
                         }
                     }
 
+                    InsertDataItem();
                     handler.Shutdown(SocketShutdown.Both);
                     handler.Close();
                 }
@@ -155,13 +155,13 @@ namespace ASQ_TermProject_Grp10
 
         private void InsertDataItem()
         {
-            Console.WriteLine("inside");
+            //Console.WriteLine("inside");
 
             this.Dispatcher.Invoke(() =>
             {
                 // your code here.
-                testTxt.Text = "Working";
-
+                //testTxt.Text += entry.ToString();
+                liveDataGrid.ItemsSource = listTest; 
                 // display data
 
             });
