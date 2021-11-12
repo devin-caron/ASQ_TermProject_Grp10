@@ -95,6 +95,7 @@
 
             <ComboBox Margin="0,21,0,0" Name="searchCB" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="32" Grid.Column="1" FontSize="16">
                 <ComboBoxItem Content="timestamp" IsSelected="True"></ComboBoxItem>
+                <ComboBoxItem Content="tailCode"></ComboBoxItem> 
                 <ComboBoxItem Content="accelx"></ComboBoxItem>
                 <ComboBoxItem Content="accely"></ComboBoxItem>
                 <ComboBoxItem Content="accelz"></ComboBoxItem>

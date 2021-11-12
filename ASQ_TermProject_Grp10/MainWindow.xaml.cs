@@ -96,15 +96,17 @@ namespace ASQ_TermProject_Grp10
 
                             listTest.Add(entry);
                         }
+
+                        if(liveData) 
+                        {
+                            UpdateDataGrid();
+                            
+                            // update database function call
+                        }
                     }
 
-                    if(liveData) 
-                    {
-                        UpdateDataGrid();
-                        
-                        // update database function call
-                    }
 
+                    UpdateDataGrid();
                     handler.Shutdown(SocketShutdown.Both);
                     handler.Close();
                 }
@@ -174,6 +176,10 @@ namespace ASQ_TermProject_Grp10
                 if (selItem == "timestamp")
                 {
                     filtered = listTest.Where(flightData => flightData.Timestamp.ToString().Contains(dataSearch.Text));
+                }
+                else if (selItem == "tailCode")
+                {
+                    filtered = listTest.Where(FlightData => FlightData.TailCode.ToString().Contains(dataSearch.Text));
                 }
                 else if (selItem == "accelx")
                 {
