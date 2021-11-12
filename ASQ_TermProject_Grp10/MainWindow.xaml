@@ -32,18 +32,18 @@
                        FontSize="36"   
                        />
 
-            <TextBox x:Name="dataSearch" Width="250"
+            <TextBox x:Name="dataSearch" Width="227"
                      Height="40"
                      VerticalContentAlignment="Center"
                      HorizontalAlignment="Left"
-                     Margin="5"
+                     Margin="108,16,0,19.2"
                      Grid.Column="1" Background="White" FontSize="24"
                      />
             <Button x:Name="searchBtn" 
                     Content="Search" 
                     FontSize="20"   
                     Grid.Column="1"
-                    Margin="260,18,380,17.2"
+                    Margin="340,16,300,19.2"
                     Background="White"
                     FontFamily="Segoe UI Semibold"
                     Width="80" Click="searchBtn_Click" 
@@ -93,6 +93,16 @@
                     Height="41" 
                     />
 
+            <ComboBox Margin="0,21,0,0" Name="searchCB" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="32" Grid.Column="1" FontSize="16">
+                <ComboBoxItem Content="timestamp" IsSelected="True"></ComboBoxItem>
+                <ComboBoxItem Content="accelx"></ComboBoxItem>
+                <ComboBoxItem Content="accely"></ComboBoxItem>
+                <ComboBoxItem Content="accelz"></ComboBoxItem>
+                <ComboBoxItem Content="weight"></ComboBoxItem>
+                <ComboBoxItem Content="altitude"></ComboBoxItem>
+                <ComboBoxItem Content="pitch"></ComboBoxItem>
+                <ComboBoxItem Content="bank"></ComboBoxItem>
+            </ComboBox>
         </Grid>
     </Border>
 </Window>

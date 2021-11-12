@@ -165,9 +165,45 @@ namespace ASQ_TermProject_Grp10
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
             string searchValue = dataSearch.Text;
+
             if (dataSearch.Text != "")
             {
-                var filtered = listTest.Where(flightData => flightData.Accelx.ToString().StartsWith(dataSearch.Text));
+                var filtered = listTest.Where(flightData => flightData.Timestamp.ToString().Contains(dataSearch.Text));
+                string selItem = searchCB.Text;
+                
+                if (selItem == "timestamp")
+                {
+                    filtered = listTest.Where(flightData => flightData.Timestamp.ToString().Contains(dataSearch.Text));
+                }
+                else if (selItem == "accelx")
+                {
+                    filtered = listTest.Where(flightData => flightData.Accelx.ToString().Contains(dataSearch.Text));
+                }
+                else if (selItem == "accely")
+                {
+                    filtered = listTest.Where(flightData => flightData.Accely.ToString().Contains(dataSearch.Text));
+                }
+                else if (selItem == "accelz")
+                {
+                    filtered = listTest.Where(flightData => flightData.Accelz.ToString().Contains(dataSearch.Text));
+                }
+                else if (selItem == "weight")
+                {
+                    filtered = listTest.Where(flightData => flightData.Weight.ToString().Contains(dataSearch.Text));
+                }
+                else if (selItem == "altitude")
+                {
+                    filtered = listTest.Where(flightData => flightData.Altitude.ToString().Contains(dataSearch.Text));
+                }
+                else if (selItem == "pitch")
+                {
+                    filtered = listTest.Where(flightData => flightData.Pitch.ToString().Contains(dataSearch.Text));
+                }
+                else if (selItem == "bank")
+                {
+                    filtered = listTest.Where(flightData => flightData.Bank.ToString().Contains(dataSearch.Text));
+                }
+
                 liveDataGrid.ItemsSource = filtered;
             }
             else
