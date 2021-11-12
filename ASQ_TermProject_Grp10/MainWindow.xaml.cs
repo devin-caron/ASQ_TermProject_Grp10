@@ -109,15 +109,16 @@ namespace ASQ_TermProject_Grp10
                             // Add entry to the list
                             listTest.Add(entry);
                         }
+
+                        // If live data is on update the datagrid
+                        if (liveData)
+                        {
+                            UpdateDataGrid();
+
+                            // Update database function call
+                        }
                     }
 
-                    // If live data is on update the datagrid
-                    if (liveData)
-                    {
-                        UpdateDataGrid();
-
-                        // Update database function call
-                    }
 
                     // close connections
                     handler.Shutdown(SocketShutdown.Both);
@@ -133,10 +134,11 @@ namespace ASQ_TermProject_Grp10
         private void UpdateDataGrid()
         {
             // Display updated list to datagrid
-            this.Dispatcher.Invoke(() =>
-            {
-                liveDataGrid.ItemsSource = listTest; 
-            });
+           this.Dispatcher.Invoke(() =>
+           {
+                liveDataGrid.ItemsSource = listTest;
+                liveDataGrid.Items.Refresh();
+           });
         }
 
         private void AsciiBtn_Click(object sender, RoutedEventArgs e)
