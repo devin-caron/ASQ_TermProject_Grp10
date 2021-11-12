@@ -24,14 +24,14 @@ namespace ASQ_TermProject_Grp10
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GroundStationTerminalUI : Window
     {
         private volatile bool liveData = true;
         private List<AircraftTelemetryEntry> listTest = new List<AircraftTelemetryEntry>();
-        private Thread listener; 
+        private Thread listener;
         public static string data = null;
 
-        public MainWindow()
+        public GroundStationTerminalUI()
         {
             InitializeComponent();
 
@@ -42,7 +42,7 @@ namespace ASQ_TermProject_Grp10
             // Start server thread to listen for client
             listener = new Thread(new ParameterizedThreadStart(RecieveTransmission));
             listener.Start();
-         }
+        }
 
         private void RecieveTransmission(object o)
         {
@@ -119,7 +119,7 @@ namespace ASQ_TermProject_Grp10
                             DbManager dbm = new DbManager();
                             dbm.InserAttitudeParameters(entry.TailCode, entry.Timestamp.ToString(), entry.Altitude, entry.Pitch, entry.Bank);
                             dbm.InsertGForceParameters(entry.TailCode, entry.Timestamp.ToString(), entry.Accelx, entry.Accely, entry.Accelz, entry.Weight);
-                        
+
                         }
                     }
 
@@ -138,11 +138,11 @@ namespace ASQ_TermProject_Grp10
         private void UpdateDataGrid()
         {
             // Display updated list to datagrid
-           this.Dispatcher.Invoke(() =>
-           {
+            this.Dispatcher.Invoke(() =>
+            {
                 liveDataGrid.ItemsSource = listTest;
                 liveDataGrid.Items.Refresh();
-           });
+            });
         }
 
         private void AsciiBtn_Click(object sender, RoutedEventArgs e)
@@ -200,7 +200,7 @@ namespace ASQ_TermProject_Grp10
             {
                 var filtered = listTest.Where(flightData => flightData.Timestamp.ToString().Contains(dataSearch.Text));
                 string selItem = searchCB.Text;
-                
+
                 if (selItem == "timestamp")
                 {
                     filtered = listTest.Where(flightData => flightData.Timestamp.ToString().Contains(dataSearch.Text));

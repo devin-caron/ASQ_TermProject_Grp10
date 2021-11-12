@@ -58,18 +58,17 @@
     </ApplicationDefinition>
     <Compile Include="AircraftTelemetryEntry.cs" />
     <Compile Include="FlightData.cs" />
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="GroundStationTerminalUI.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DbManager.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="GroundStationTerminalUI.xaml.cs">
+      <DependentUpon>GroundStationTerminalUI.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
