@@ -58,7 +58,6 @@
     </ApplicationDefinition>
     <Compile Include="AircraftTelemetryEntry.cs" />
     <Compile Include="FlightData.cs" />
-    <Compile Include="Mainwindow.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
