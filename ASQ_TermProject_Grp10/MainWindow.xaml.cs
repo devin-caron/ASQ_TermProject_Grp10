@@ -146,7 +146,7 @@ namespace ASQ_TermProject_Grp10
 
         private void LiveDataBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (liveData == true)
+            if (liveData)
             {
                 // Stop Live Data
                 liveData = false;
