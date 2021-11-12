@@ -10,6 +10,7 @@ namespace AircraftTransmissionSystem
 {
     class AircraftTelemetryEntry {
         private DateTime timestamp;
+        private String tailCode = "";
         private float accelx = 0.0f;
         private float accely = 0.0f;
         private float accelz = 0.0f;
@@ -18,12 +19,13 @@ namespace AircraftTransmissionSystem
         private float pitch = 0.0f;
         private float bank = 0.0f;
 
-        public AircraftTelemetryEntry(String telemetryLnStr) {
+        public AircraftTelemetryEntry(String telemetryLnStr, String flightName) {
 
             if (telemetryLnStr == " ") {
                 return;
             }
 
+            tailCode = flightName;
             parseTelemetryLn(telemetryLnStr);
         }
 
@@ -84,6 +86,7 @@ namespace AircraftTransmissionSystem
         }
 
         public DateTime Timestamp => timestamp;
+        public String TailCode => tailCode;
         public float Accelx => accelx;
         public float Accely => accely;
         public float Accelz => accelz;
