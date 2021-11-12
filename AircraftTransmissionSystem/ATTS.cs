@@ -72,33 +72,34 @@ namespace AircraftTransmissionSystem
             for (int i = 0; i < numOfFiles; i++) {
                 flights.Add(readFile(filePaths[i]));
                 Console.WriteLine("[INFO] Downloading data from Aircraft '{0}' flight start '{1}'", flights[i].FlightName, flights[i].TelemetryList.ElementAt(1).Timestamp.ToString());
-                Thread.Sleep(1000);
+                Thread.Sleep(600);
             }       
         }
 
         static FlightData readFile(String path) {
-                String flightFilename = path.Substring(path.LastIndexOf('\\'));
-                FlightData fd = new FlightData(flightFilename);
-                
-                try {
-                    using (StreamReader reader = new StreamReader(path)) {
-                        String ln;
+            String flightFilename = path.Substring(path.LastIndexOf('\\'));
+            FlightData fd = new FlightData(flightFilename);
+            
+            try {
+                using (StreamReader reader = new StreamReader(path)) {
+                    String ln;
 
-                        while ((ln = reader.ReadLine()) != null) {
-                            if (ln == "") {
-                                break;
-                            }
-
-                            AircraftTelemetryEntry newEntry = new AircraftTelemetryEntry(ln);
-                            fd.addEntry(newEntry);
+                    while ((ln = reader.ReadLine()) != null) {
+                        if (ln == " ") {
+                            Console.WriteLine("[WARN] Read empty line. Ignoring data.");
+                            break; 
                         }
+
+                        AircraftTelemetryEntry newEntry = new AircraftTelemetryEntry(ln);
+                        fd.addEntry(newEntry);
                     }
                 }
-                catch(Exception e) {
-                    Console.WriteLine("ATTS::readFile() encountered: " + e.Message);
-                }
+            }
+            catch(Exception e) {
+                Console.WriteLine("ATTS::readFile() encountered: " + e.Message);
+            }
 
-                return fd;
+            return fd;
         }
     
         static void printMenu() {
@@ -153,10 +154,12 @@ namespace AircraftTransmissionSystem
                     
                     sendString(ref totalBytesSent, sender, "<EOF>");
 
+
                     // Release the socket.  
                     sender.Shutdown(SocketShutdown.Both);
                     sender.Close();
 
+                    Console.WriteLine("[INFO] Transmission completed, sent: {0} bytes.", totalBytesSent);
                 }
                 catch (ArgumentNullException ane)
                 {
