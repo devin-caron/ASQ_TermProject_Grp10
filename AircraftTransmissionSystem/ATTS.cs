@@ -147,6 +147,7 @@ namespace AircraftTransmissionSystem
 
                         for (int y = 0; y < flights[i].TelemetryList.Count; y++) {
                             sendString(ref totalBytesSent, sender, packetize(flights[i].FlightName, flights[i].TelemetryList.ElementAt(y)));
+                            //Thread.Sleep(1); This line attempts to simulate real-world transfer speeds.
                         }
 
                     }
@@ -160,6 +161,7 @@ namespace AircraftTransmissionSystem
                     sender.Close();
 
                     Console.WriteLine("[INFO] Transmission completed, sent: {0} bytes.", totalBytesSent);
+                    Thread.Sleep(2500);
                 }
                 catch (ArgumentNullException ane)
                 {
