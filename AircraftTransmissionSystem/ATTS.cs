@@ -36,6 +36,14 @@ namespace AircraftTransmissionSystem
                 switch (menuOption) {
                     case 1:
                         Console.Clear();
+
+                        if(bDataRetrieved)
+                        {
+                            Console.WriteLine("[WARN] Data already retrieved! Ignoring.");
+                            Thread.Sleep(1500);
+                            break;
+                        }
+
                         readTelemetry();
                         bDataRetrieved = true;
                         break;
@@ -50,10 +58,6 @@ namespace AircraftTransmissionSystem
                         StartTransmission();
                         break;
                     case 3:
-						Console.Clear();
-						packetize(flights[1].FlightName, flights[1].TelemetryList.ElementAt(0));
-                        break;
-                    case 4:
                         return;
                     default:
                         continue;
@@ -72,7 +76,7 @@ namespace AircraftTransmissionSystem
             for (int i = 0; i < numOfFiles; i++) {
                 flights.Add(readFile(filePaths[i]));
                 Console.WriteLine("[INFO] Downloading data from Aircraft '{0}' flight start '{1}'", flights[i].FlightName, flights[i].TelemetryList.ElementAt(1).Timestamp.ToString());
-                Thread.Sleep(600);
+                Thread.Sleep(400);
             }       
         }
 
@@ -86,7 +90,7 @@ namespace AircraftTransmissionSystem
 
                     while ((ln = reader.ReadLine()) != null) {
                         if (ln == " ") {
-                            Console.WriteLine("[WARN] Read empty line. Ignoring data.");
+                            //Console.WriteLine("[WARN] Read empty line. Ignoring data.");
                             break; 
                         }
 
@@ -107,8 +111,7 @@ namespace AircraftTransmissionSystem
             Console.WriteLine(" === Aircraft Transmission System Terminal ===");
             Console.WriteLine("\t1) Download Telemetry");
             Console.WriteLine("\t2) Transmit All Flight Data");
-            Console.WriteLine("\t3) Test func");
-            Console.WriteLine("\t4) Exit");
+            Console.WriteLine("\t3) Exit");
         }
 
         static void StartTransmission() {
@@ -200,16 +203,6 @@ namespace AircraftTransmissionSystem
 
             // Receive the response from the remote device.  
             int bytesRec = socket.Receive(bytes);
-           
-            //TODO: need to add a reliability system (if one doesn't already exist)
-            /*
-				String recvStr = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-				
-				if(recvStr != "<ACK>") {
-					socket.Send(msg);
-				}            
-			*/
-
         }
 		
 		static String packetize(String flightName, AircraftTelemetryEntry currentEntry) {
