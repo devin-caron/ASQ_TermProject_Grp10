@@ -116,13 +116,6 @@ namespace ASQ_TermProject_Grp10
             }
         }
 
-        private String[] splitData(String data)
-        {
-            String[] subStrings = data.Split('|');
-
-            return new string[] { subStrings[0], subStrings[1], subStrings[2] };
-        }
-
         private void UpdateDataGrid()
         {
             this.Dispatcher.Invoke(() =>
