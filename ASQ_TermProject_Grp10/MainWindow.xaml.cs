@@ -165,9 +165,15 @@ namespace ASQ_TermProject_Grp10
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
             string searchValue = dataSearch.Text;
-            var filtered = listTest.Where(flightData => flightData.Accelx.ToString().StartsWith(dataSearch.Text));
-
-            liveDataGrid.ItemsSource = filtered;
+            if (dataSearch.Text != "")
+            {
+                var filtered = listTest.Where(flightData => flightData.Accelx.ToString().StartsWith(dataSearch.Text));
+                liveDataGrid.ItemsSource = filtered;
+            }
+            else
+            {
+                liveDataGrid.ItemsSource = listTest;
+            }
         }
     }
 }
