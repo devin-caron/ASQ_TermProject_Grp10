@@ -43,11 +43,11 @@
                     Content="Search" 
                     FontSize="20"   
                     Grid.Column="1"
-                    Margin="260,23,380,22.2" Click="LiveDataBtn_Click"
+                    Margin="260,23,380,22.2"
                     Background="White"
                     FontFamily="Segoe UI Semibold"
                     Width="80" 
-                    Height="30" 
+                    Height="30" Click="searchBtn_Click" 
                     />
 
             <DataGrid x:FieldModifier="public" AutoGenerateColumns="True" x:Name="liveDataGrid"

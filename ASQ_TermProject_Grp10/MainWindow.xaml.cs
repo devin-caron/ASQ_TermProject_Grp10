@@ -31,12 +31,6 @@ namespace ASQ_TermProject_Grp10
 
             listener = new Thread(new ParameterizedThreadStart(RecieveTransmission));
             listener.Start();
-
-            //Server s = new Server();
-
-
-            // send data to database
-
          }
 
         private void RecieveTransmission(object o)
@@ -103,8 +97,11 @@ namespace ASQ_TermProject_Grp10
                         }
                     }
 
-                    if(liveData) {
+                    if(liveData) 
+                    {
                         UpdateDataGrid();
+                        
+                        // update database function call
                     }
 
                     handler.Shutdown(SocketShutdown.Both);
@@ -162,6 +159,28 @@ namespace ASQ_TermProject_Grp10
                 searchBtn.IsEnabled = false;
                 liveTxt.Text = "ON";
             }
+        }
+
+        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //string searchValue = textBox1.Text;
+
+            //dgvProjects.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //try
+            //{
+            //    foreach (DataGridViewRow row in dgvProjects.Rows)
+            //    {
+            //        if (row.Cells[2].Value.ToString().Equals(searchValue))
+            //        {
+            //            row.Selected = true;
+            //            break;
+            //        }
+            //    }
+            //}
+            //catch (Exception exc)
+            //{
+            //    MessageBox.Show(exc.Message);
+            //}
         }
     }
 }
