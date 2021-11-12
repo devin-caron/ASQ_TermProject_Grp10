@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+ *FILE         : MainWindow.xaml.cs
+ *PROJECT      : SENG3020 - Milestone 2
+ *PROGRAMMERS  : Devin Caron, Cole Spehar, Isaiah Andrews, Dusan Sasic
+ *FIRST VERSON : 2021-11-09
+ *DESCRIPTION  :
+ *				
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -19,18 +28,18 @@ namespace ASQ_TermProject_Grp10
     {
         private volatile bool liveData = true;
         private List<AircraftTelemetryEntry> listTest = new List<AircraftTelemetryEntry>();
-        private Thread listener;
-
-        // Incoming data from the client.  
+        private Thread listener; 
         public static string data = null;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            // Set defaults
             dataSearch.IsReadOnly = true;
             searchBtn.IsEnabled = false;
 
+            // Start server thread to listen for client
             listener = new Thread(new ParameterizedThreadStart(RecieveTransmission));
             listener.Start();
          }
@@ -72,7 +81,7 @@ namespace ASQ_TermProject_Grp10
                     // An incoming connection needs to be processed.  
                     while (true)
                     {
-                        //C-FGAX|7_8_2018 19:36:34,-6E-06,-0.001649,-0.0008482153.744,605.7504,-0.028133,5.6E-05,|202
+                        // C-FGAX|7_8_2018 19:36:34,-6E-06,-0.001649,-0.0008482153.744,605.7504,-0.028133,5.6E-05,|202
                         int bytesRec = handler.Receive(bytes);
                         data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
 
@@ -85,27 +94,32 @@ namespace ASQ_TermProject_Grp10
                             break;
                         }
 
+                        // Split the packet
                         String[] splitPacket = data.Split('|');
 
                         AircraftTelemetryEntry entry = new AircraftTelemetryEntry(splitPacket[1], splitPacket[0]);
 
+                        // Verify CheckSum
                         if (entry.calcChkSum() == int.Parse(splitPacket[2]))
                         {
                             //Sends acknowledgment data to ATTS   
                             byte[] msg = Encoding.ASCII.GetBytes("<ACK>");
                             handler.Send(msg);
 
+                            // Add entry to the list
                             listTest.Add(entry);
                         }
                     }
 
+                    // If live data is on update the datagrid
                     if (liveData)
                     {
                         UpdateDataGrid();
 
-                        // update database function call
+                        // Update database function call
                     }
 
+                    // close connections
                     handler.Shutdown(SocketShutdown.Both);
                     handler.Close();
                 }
@@ -125,6 +139,7 @@ namespace ASQ_TermProject_Grp10
 
         private void UpdateDataGrid()
         {
+            // Display updated list to datagrid
             this.Dispatcher.Invoke(() =>
             {
                 liveDataGrid.ItemsSource = listTest; 
@@ -134,14 +149,15 @@ namespace ASQ_TermProject_Grp10
         private void AsciiBtn_Click(object sender, RoutedEventArgs e)
         {
 
+            // Setup save file dialog
             SaveFileDialog save = new SaveFileDialog();
-
             save.FileName = "AircraftData.txt";
-
             save.Filter = "Text File | *.txt";
 
+            // Verify save was pressed
             if (save.ShowDialog() == true)
             {
+                // Start streamwriter and transfer data to txt file
                 StreamWriter writer = new StreamWriter(save.OpenFile());
 
                 foreach (var item in listTest)
@@ -150,6 +166,7 @@ namespace ASQ_TermProject_Grp10
                         item.Weight.ToString(), item.Altitude.ToString(), item.Pitch.ToString(), item.Bank.ToString()));
                 }
 
+                // close writer
                 writer.Dispose();
                 writer.Close();
             }
@@ -179,6 +196,7 @@ namespace ASQ_TermProject_Grp10
         {
             string searchValue = dataSearch.Text;
 
+            // search by column selected
             if (dataSearch.Text != "")
             {
                 var filtered = listTest.Where(flightData => flightData.Timestamp.ToString().Contains(dataSearch.Text));
@@ -225,6 +243,7 @@ namespace ASQ_TermProject_Grp10
             }
             else
             {
+                // display full list
                 liveDataGrid.ItemsSource = listTest;
             }
         }
