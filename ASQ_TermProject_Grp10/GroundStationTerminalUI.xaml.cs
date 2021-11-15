@@ -44,11 +44,21 @@ namespace ASQ_TermProject_Grp10
             asciiBtn.IsEnabled = false;
 
             // Start server thread to listen for client
-            listener = new Thread(new ParameterizedThreadStart(RecieveTransmission));
+            listener = new Thread(new ParameterizedThreadStart(ReceiveTransmission));
             listener.Start();
         }
 
-        private void RecieveTransmission(object o)
+        // FUNCTION     : ReceiveTransmission
+        // DESCRIPTION  :
+        //                This function runs a socket server listening
+        //                for a client to connect and taking it's sent
+        //                data packet. It then parses it and updates the
+        //                live display.
+        // PARAMETERS   : 
+        //                object o : 
+        //RETURNS       : 
+        //                void
+        private void ReceiveTransmission(object o)
         {
             // Data buffer for incoming data.  
             byte[] bytes = new Byte[1024];
