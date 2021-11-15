@@ -7,13 +7,10 @@
         mc:Ignorable="d"
         Title="Ground Station" Height="600" Width="920"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        Background="Transparent"
-        AllowsTransparency="True"
+        ResizeMode="NoResize"
         >
 
-    <Border Background="#FF2D2D30"
-            CornerRadius="20">
+    <Border Background="#FF2D2D30">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -43,10 +40,9 @@
                     Content="Search" 
                     FontSize="20"   
                     Grid.Column="1"
-                    Margin="340,16,300,19.2"
+                    Margin="340,16,268.6,19.2"
                     Background="White"
-                    FontFamily="Segoe UI Semibold"
-                    Width="80" Click="searchBtn_Click" 
+                    FontFamily="Segoe UI Semibold" Click="searchBtn_Click" 
                     />
 
             <DataGrid x:FieldModifier="public" AutoGenerateColumns="True" x:Name="liveDataGrid"
@@ -60,15 +56,14 @@
                     x:Name="asciiBtn" 
                     Content="Print to ASCII" 
                     HorizontalAlignment="Left" 
-                    Margin="6,466,0,0" 
+                    Margin="199,429.8,0,0" 
                     VerticalAlignment="Top" 
                     Width="169" 
                     Height="41" 
-                    Grid.Column="1" 
                     Grid.Row="1" 
                     Background="White" 
                     FontSize="22" 
-                    FontFamily="Segoe UI Semibold" Click="AsciiBtn_Click"/>
+                    FontFamily="Segoe UI Semibold" Click="AsciiBtn_Click" Grid.ColumnSpan="2"/>
 
             <TextBlock x:Name="liveTxt" Text="ON"
                        VerticalAlignment="Center"
@@ -86,10 +81,10 @@
                     HorizontalAlignment="Right"
                     FontSize="24"   
                     Grid.Column="1"
-                    Margin="0,18,95,22.2" Click="LiveDataBtn_Click"
+                    Margin="0,16,78.6,18.2" Click="LiveDataBtn_Click"
                     Background="White"
                     FontFamily="Segoe UI Semibold"
-                    Width="169" 
+                    Width="142" 
                     Height="41" 
                     />
 

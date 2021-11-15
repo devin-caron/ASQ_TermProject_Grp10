@@ -3,7 +3,9 @@
  *PROJECT      : SENG3020 - Milestone 2
  *PROGRAMMERS  : Devin Caron, Cole Spehar, Isaiah Andrews, Dusan Sasic
  *FIRST VERSON : 2021-11-09
- *DESCRIPTION  :
+ *DESCRIPTION  : This program models a Ground Station Terminal that receives live data
+ *               updates from an aircraft. It parses this data then displays it live.
+ *               The program also allows you to pause the live data and search it.
  *				
  */
 
@@ -27,8 +29,10 @@ namespace ASQ_TermProject_Grp10
     public partial class GroundStationTerminalUI : Window
     {
         private volatile bool liveData = true;
-        private List<AircraftTelemetryEntry> listTest = new List<AircraftTelemetryEntry>();
+        private List<AircraftTelemetryEntry> liveList = new List<AircraftTelemetryEntry>();
+        private List<AircraftTelemetryEntry> pausedList = new List<AircraftTelemetryEntry>();
         private Thread listener;
+        private Thread updateThread;
         public static string data = null;
 
         public GroundStationTerminalUI()
@@ -38,6 +42,7 @@ namespace ASQ_TermProject_Grp10
             // Set defaults
             dataSearch.IsReadOnly = true;
             searchBtn.IsEnabled = false;
+            asciiBtn.IsEnabled = false;
 
             // Start server thread to listen for client
             listener = new Thread(new ParameterizedThreadStart(RecieveTransmission));
@@ -107,13 +112,13 @@ namespace ASQ_TermProject_Grp10
                             handler.Send(msg);
 
                             // Add entry to the list
-                            listTest.Add(entry);
+                            liveList.Add(entry);
                         }
 
                         // If live data is on update the datagrid
                         if (liveData)
                         {
-                            UpdateDataGrid();
+                            UpdateDataGrid(liveList);
 
                             // Update database function call
                             DbManager dbm = new DbManager();
@@ -135,12 +140,12 @@ namespace ASQ_TermProject_Grp10
             }
         }
 
-        private void UpdateDataGrid()
+        private void UpdateDataGrid(List<AircraftTelemetryEntry> data)
         {
             // Display updated list to datagrid
             this.Dispatcher.Invoke(() =>
             {
-                liveDataGrid.ItemsSource = listTest;
+                liveDataGrid.ItemsSource = data;
                 liveDataGrid.Items.Refresh();
             });
         }
@@ -159,7 +164,7 @@ namespace ASQ_TermProject_Grp10
                 // Start streamwriter and transfer data to txt file
                 StreamWriter writer = new StreamWriter(save.OpenFile());
 
-                foreach (var item in listTest)
+                foreach (var item in pausedList)
                 {
                     writer.WriteLine(string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}", item.Timestamp, item.Accelx.ToString(), item.Accely.ToString(), item.Accelz.ToString(),
                         item.Weight.ToString(), item.Altitude.ToString(), item.Pitch.ToString(), item.Bank.ToString()));
@@ -176,7 +181,9 @@ namespace ASQ_TermProject_Grp10
             if (liveData)
             {
                 // Stop Live Data
+                pausedList = new List<AircraftTelemetryEntry>(liveList);
                 liveData = false;
+                asciiBtn.IsEnabled = true;
                 dataSearch.IsReadOnly = false;
                 searchBtn.IsEnabled = true;
                 liveTxt.Text = "OFF";
@@ -184,7 +191,9 @@ namespace ASQ_TermProject_Grp10
             else
             {
                 // Start Live Data
+                UpdateDataGrid(liveList);
                 liveData = true;
+                asciiBtn.IsEnabled = false;
                 dataSearch.IsReadOnly = true;
                 searchBtn.IsEnabled = false;
                 liveTxt.Text = "ON";
@@ -195,47 +204,47 @@ namespace ASQ_TermProject_Grp10
         {
             string searchValue = dataSearch.Text;
 
-            // search by column selected
+            // Search by column selected
             if (dataSearch.Text != "")
             {
-                var filtered = listTest.Where(flightData => flightData.Timestamp.ToString().Contains(dataSearch.Text));
+                var filtered = pausedList.Where(flightData => flightData.Timestamp.ToString().Contains(dataSearch.Text));
                 string selItem = searchCB.Text;
 
                 if (selItem == "timestamp")
                 {
-                    filtered = listTest.Where(flightData => flightData.Timestamp.ToString().Contains(dataSearch.Text));
+                    filtered = pausedList.Where(flightData => flightData.Timestamp.ToString().Contains(dataSearch.Text));
                 }
                 else if (selItem == "tailCode")
                 {
-                    filtered = listTest.Where(FlightData => FlightData.TailCode.ToString().Contains(dataSearch.Text));
+                    filtered = pausedList.Where(FlightData => FlightData.TailCode.ToString().Contains(dataSearch.Text));
                 }
                 else if (selItem == "accelx")
                 {
-                    filtered = listTest.Where(flightData => flightData.Accelx.ToString().Contains(dataSearch.Text));
+                    filtered = pausedList.Where(flightData => flightData.Accelx.ToString().Contains(dataSearch.Text));
                 }
                 else if (selItem == "accely")
                 {
-                    filtered = listTest.Where(flightData => flightData.Accely.ToString().Contains(dataSearch.Text));
+                    filtered = pausedList.Where(flightData => flightData.Accely.ToString().Contains(dataSearch.Text));
                 }
                 else if (selItem == "accelz")
                 {
-                    filtered = listTest.Where(flightData => flightData.Accelz.ToString().Contains(dataSearch.Text));
+                    filtered = pausedList.Where(flightData => flightData.Accelz.ToString().Contains(dataSearch.Text));
                 }
                 else if (selItem == "weight")
                 {
-                    filtered = listTest.Where(flightData => flightData.Weight.ToString().Contains(dataSearch.Text));
+                    filtered = pausedList.Where(flightData => flightData.Weight.ToString().Contains(dataSearch.Text));
                 }
                 else if (selItem == "altitude")
                 {
-                    filtered = listTest.Where(flightData => flightData.Altitude.ToString().Contains(dataSearch.Text));
+                    filtered = pausedList.Where(flightData => flightData.Altitude.ToString().Contains(dataSearch.Text));
                 }
                 else if (selItem == "pitch")
                 {
-                    filtered = listTest.Where(flightData => flightData.Pitch.ToString().Contains(dataSearch.Text));
+                    filtered = pausedList.Where(flightData => flightData.Pitch.ToString().Contains(dataSearch.Text));
                 }
                 else if (selItem == "bank")
                 {
-                    filtered = listTest.Where(flightData => flightData.Bank.ToString().Contains(dataSearch.Text));
+                    filtered = pausedList.Where(flightData => flightData.Bank.ToString().Contains(dataSearch.Text));
                 }
 
                 liveDataGrid.ItemsSource = filtered;
@@ -243,7 +252,7 @@ namespace ASQ_TermProject_Grp10
             else
             {
                 // display full list
-                liveDataGrid.ItemsSource = listTest;
+                UpdateDataGrid(pausedList);
             }
         }
     }
