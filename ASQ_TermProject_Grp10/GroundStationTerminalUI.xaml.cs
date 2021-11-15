@@ -32,7 +32,6 @@ namespace ASQ_TermProject_Grp10
         private List<AircraftTelemetryEntry> liveList = new List<AircraftTelemetryEntry>();
         private List<AircraftTelemetryEntry> pausedList = new List<AircraftTelemetryEntry>();
         private Thread listener;
-        private Thread updateThread;
         public static string data = null;
 
         public GroundStationTerminalUI()
