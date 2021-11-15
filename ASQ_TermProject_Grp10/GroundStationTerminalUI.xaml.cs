@@ -49,15 +49,12 @@ namespace ASQ_TermProject_Grp10
         }
 
         // FUNCTION     : ReceiveTransmission
-        // DESCRIPTION  :
-        //                This function runs a socket server listening
+        // DESCRIPTION  : This function runs a socket server listening
         //                for a client to connect and taking it's sent
         //                data packet. It then parses it and updates the
         //                live display.
-        // PARAMETERS   : 
-        //                object o :  
-        // RETURNS      : 
-        //                void
+        // PARAMETERS   : object o :  
+        // RETURNS      : void
         private void ReceiveTransmission(object o)
         {
             // Data buffer for incoming data.  
