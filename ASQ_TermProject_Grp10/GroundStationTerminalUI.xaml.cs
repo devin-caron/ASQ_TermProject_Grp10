@@ -55,8 +55,8 @@ namespace ASQ_TermProject_Grp10
         //                data packet. It then parses it and updates the
         //                live display.
         // PARAMETERS   : 
-        //                object o : 
-        //RETURNS       : 
+        //                object o :  
+        // RETURNS      : 
         //                void
         private void ReceiveTransmission(object o)
         {
