@@ -42,7 +42,7 @@
                     Grid.Column="1"
                     Margin="340,16,268.6,19.2"
                     Background="White"
-                    FontFamily="Segoe UI Semibold" Click="searchBtn_Click" 
+                    FontFamily="Segoe UI Semibold" Click="SearchBtn_Click" 
                     />
 
             <DataGrid x:FieldModifier="public" AutoGenerateColumns="True" x:Name="liveDataGrid"

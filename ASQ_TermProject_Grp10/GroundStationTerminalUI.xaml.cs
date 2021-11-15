@@ -146,6 +146,11 @@ namespace ASQ_TermProject_Grp10
             }
         }
 
+        // FUNCTION     : UpdateDataGrid
+        // DESCRIPTION  : This function takes the past Aircraft list
+        //                object and updates the datagrid with it.
+        // PARAMETERS   : List<AircraftTelemetryEntry> data : stores aircraft data
+        // RETURNS      : void
         private void UpdateDataGrid(List<AircraftTelemetryEntry> data)
         {
             // Display updated list to datagrid
@@ -156,6 +161,14 @@ namespace ASQ_TermProject_Grp10
             });
         }
 
+        // FUNCTION     : AsciiBtn_Click
+        // DESCRIPTION  : This function is called when they print ascii
+        //                button is pressed and takes the current data 
+        //                displayed in the data grid and prompts the user
+        //                to save it to a file.
+        // PARAMETERS   : object sender
+        //                RoutedEventArgs e
+        // RETURNS      : void
         private void AsciiBtn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -182,6 +195,14 @@ namespace ASQ_TermProject_Grp10
             }
         }
 
+        // FUNCTION     : LiveDataBtn_Click
+        // DESCRIPTION  : This function is called when the live data
+        //                button is pressed. It then checks the liveData
+        //                bool to see if it's true or false. It then reverses
+        //                it. If the live data is turned off it will enable the
+        //                buttons.
+        // PARAMETERS   : object sender, RoutedEventArgs e 
+        // RETURNS      : void
         private void LiveDataBtn_Click(object sender, RoutedEventArgs e)
         {
             if (liveData)
@@ -206,7 +227,16 @@ namespace ASQ_TermProject_Grp10
             }
         }
 
-        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        // FUNCTION     : SearchBtn_Click
+        // DESCRIPTION  : This function is called when the search
+        //                button is clicked. It takes the text in
+        //                the text box and searches for that under
+        //                the category selected to search for. If
+        //                nothing is entered it resets the datagrid
+        //                to display all the data again.
+        // PARAMETERS   : object sender, RoutedEventArgs e 
+        // RETURNS      : void
+        private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
             string searchValue = dataSearch.Text;
 
@@ -257,7 +287,7 @@ namespace ASQ_TermProject_Grp10
             }
             else
             {
-                // display full list
+                // Display full list
                 UpdateDataGrid(pausedList);
             }
         }
