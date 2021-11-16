@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+ * FILE         : AircraftTelemetryEntry.cs
+ * PROJECT      : SENG3020 - Milestone 2
+ * PROGRAMMERS  : Devin Caron, Cole Spehar, Isaiah Andrews, Dusan Sasic
+ * FIRST VERSON : 2021-11-09
+ * DESCRIPTION  : This file contains the class for the AircraftTelemetryEntry object.
+ *                This object contains all of the airplane's state data.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -18,6 +27,14 @@ namespace AircraftTransmissionSystem
         private float pitch = 0.0f;
         private float bank = 0.0f;
 
+
+        /*
+          FUNCTION: AircraftTelemetryEntry() - CONSTRUCTOR
+          DESCRIPTION: This constructor takes a string representing the aircraft's state
+                       and uses it to populate the objects attributes.
+          PARAMETERS: String telemetryLnStr: String representing the aircraft's state.
+          RETURNS: void
+        */
         public AircraftTelemetryEntry(String telemetryLnStr) {
 
             if (telemetryLnStr == " ") {
@@ -26,7 +43,13 @@ namespace AircraftTransmissionSystem
 
             parseTelemetryLn(telemetryLnStr);
         }
-
+        
+        /*
+          FUNCTION: calcChkSum()
+          DESCRIPTION: This function calculates the check sum using the data stored in this object.
+          PARAMETERS: void
+          RETURNS: int : The resultant check sum, after being rounded.
+        */
         //TODO: add test that this function calculates correct check sums
         public int calcChkSum() {
             float subCheckSum = 0.0f;
@@ -36,7 +59,12 @@ namespace AircraftTransmissionSystem
             return (int)Math.Round(subCheckSum);
         }
 
-
+        /*
+          FUNCTION: parseTelemetryLn() 
+          DESCRIPTION: This function parses the string that was sent into the constructor.
+          PARAMETERS: String telemetryLnStr : A single line from the airplane's state file.
+          RETURNS: void
+        */
         //TODO: add test that determines that this function parses correctly
         private void parseTelemetryLn(String telemetryLnStr) {
             //7_8_2018 19:34:3,-0.319754, -0.716176, 1.797150, 2154.670410, 1643.844116, 0.022278, 0.033622,
@@ -52,6 +80,13 @@ namespace AircraftTransmissionSystem
             bank = float.Parse(subStrings[7]);
         }
 
+        /*
+          FUNCTION: convertStringTimeToDateTime()
+          DESCRIPTION: This function converts the file's version of timestamps into 
+                       .NET's DateTime object.
+          PARAMETERS: String strTimeStamp : The string time stamp.
+          RETURNS: DateTime : The proper DateTime object, set with the timestamp from the data.
+        */
         //TODO: add test that detemines if this function creates correct timestamps
         private DateTime convertStringTimeToDateTime(String strTimeStamp) {
             //7_8_2018 19:34:3
@@ -68,10 +103,23 @@ namespace AircraftTransmissionSystem
             return DateTime.Parse(new string(properStringFormat));
         }
 
+        /*
+          FUNCTION: convertDateTimeToString()
+          DESCRIPTION: This function does the reverse of the previous function.
+          PARAMETERS: DateTime dt: The timestamp in DateTime format.
+          RETURNS: String : A timestamp string the format of the original data text files.
+        */
         private String convertDateTimeToString(DateTime dt) {
             return dt.ToString("M_d_yyyy HH:mm:s");
         }
 
+        /*
+          FUNCTION: ToString()
+          DESCRIPTION: This is an override of the ToString function that makes the string representation 
+                       of this object a line from the original aircraft data text file.
+          PARAMETERS: void
+          RETURNS: String : Representation of this object as line from the original aircraft data text file.
+        */
         //TODO: add test to verify that this funciton can make an exact replica of the string that was passed into this object's constructor (excluding the datetime field) 
         public override String ToString() {
             StringBuilder sb = new StringBuilder();
