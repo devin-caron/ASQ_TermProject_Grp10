@@ -3,7 +3,8 @@
  * PROJECT      : SENG3020 - Milestone 2
  * PROGRAMMERS  : Devin Caron, Cole Spehar, Isaiah Andrews, Dusan Sasic
  * FIRST VERSON : 2021-11-09
- * DESCRIPTION  : This 
+ * DESCRIPTION  : An object created from this class contains a string representing the tail code of the plane the data has come from,
+ *                and a list of all of the telemetry records.
  */
 
 using System;
