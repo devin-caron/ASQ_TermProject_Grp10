@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * FILE         : ATTS.cs
+ * PROJECT      : SENG3020 - Milestone 2
+ * PROGRAMMERS  : Devin Caron, Cole Spehar, Isaiah Andrews, Dusan Sasic
+ * FIRST VERSON : 2021-11-09
+ * DESCRIPTION  :  
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,7 +26,7 @@ namespace AircraftTransmissionSystem
         static void Main(string[] args) {
            int menuOption = 0; 
 
-
+          //this function call and the following while loop handles the ATTS's terminal based UI
            printMenu();
 
             while (true) { 
@@ -65,6 +73,12 @@ namespace AircraftTransmissionSystem
             }
         }
 
+        /*
+          FUNCTION: readTelemetry()
+          DESCRIPTION: This function reads all of the aircraft transmission files and commits them to the 'flights' list.
+          PARAMETERS: void
+          RETURNS: void
+        */
         static void readTelemetry() {
             String[] filePaths;
             String flightDir = Path.GetFullPath(Path.Combine(@"..\..\..\AircraftTransmissionData\"));
@@ -80,6 +94,12 @@ namespace AircraftTransmissionSystem
             }       
         }
 
+        /*
+          FUNCTION: readFile()
+          DESCRIPTION: This function reads and creates a FlightData object with the aircraft telemetry data from the file at the specified path.
+          PARAMETERS: String path : The path to file to be read.
+          RETURNS: FlightData : An FlightData object that contains all of the flight data from the file.
+        */
         static FlightData readFile(String path) {
             String flightFilename = path.Substring(path.LastIndexOf('\\'));
             FlightData fd = new FlightData(flightFilename);
@@ -105,7 +125,13 @@ namespace AircraftTransmissionSystem
 
             return fd;
         }
-    
+
+        /*
+          FUNCTION: printMenu()
+          DESCRIPTION: This function displays a menu in order to allow the user to interact with the ATTS.
+          PARAMETERS: void
+          RETURNS: void
+        */
         static void printMenu() {
             Console.Clear();
             Console.WriteLine(" === Aircraft Transmission System Terminal ===");
@@ -114,6 +140,12 @@ namespace AircraftTransmissionSystem
             Console.WriteLine("\t3) Exit");
         }
 
+        /*
+          FUNCTION: StartTransmission()
+          DESCRIPTION: This function connects to and sends the aircraft telemetry data to the Ground Station Terminal.
+          PARAMETERS: void
+          RETURNS: void
+        */
         static void StartTransmission() {
 
 
@@ -190,6 +222,14 @@ namespace AircraftTransmissionSystem
             }
         }
 
+        /*
+          FUNCTION: sendString()
+          DESCRIPTION: This function sends a given string through the given socket.
+          PARAMETERS: ref int byteSent : A ref int that keeps track of the amount of bytes send over the whole set of transmissions.
+                      Socket socket : The socket that is connected to the Ground Station Terminal. 
+                      String strMsg : The string set to be encoded and transmitted.
+          RETURNS: void
+        */
         static void sendString(ref int bytesSent, Socket socket, String strMsg) {
             // Data buffer for incoming data.  
             byte[] bytes = new byte[1024];
@@ -205,15 +245,22 @@ namespace AircraftTransmissionSystem
             int bytesRec = socket.Receive(bytes);
         }
 		
-		static String packetize(String flightName, AircraftTelemetryEntry currentEntry) {
-			StringBuilder sb = new StringBuilder();
+        /*
+          FUNCTION: packetize()
+          DESCRIPTION: This function takes an AircraftTelemetryEntry and converts in into a packet ready for transmission.
+          PARAMETERS:         String flightName : The tail code of the airplane the data is coming from.
+            AircraftTelemetryEntry currentEntry : The object containing all of the data for the current set of state data being transmitted.
+          RETURNS: String : The packetized data ready to be transmitted.
+        */
+        static String packetize(String flightName, AircraftTelemetryEntry currentEntry) {
+          StringBuilder sb = new StringBuilder();
 
-            sb.Append(flightName + @"|");
-            sb.Append(currentEntry.ToString() + @"|");
-            sb.Append(currentEntry.calcChkSum());
+                sb.Append(flightName + @"|");
+                sb.Append(currentEntry.ToString() + @"|");
+                sb.Append(currentEntry.calcChkSum());
 
 
-            return sb.ToString();
-		}
+                return sb.ToString();
+        }
 	}
 }

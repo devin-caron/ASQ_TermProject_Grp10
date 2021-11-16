@@ -1,9 +1,9 @@
 ﻿/*
- *FILE         : MainWindow.xaml.cs
- *PROJECT      : SENG3020 - Milestone 2
- *PROGRAMMERS  : Devin Caron, Cole Spehar, Isaiah Andrews, Dusan Sasic
- *FIRST VERSON : 2021-11-09
- *DESCRIPTION  : This program models a Ground Station Terminal that receives live data
+ * FILE         : GroundStationTerminalUI.xaml.cs
+ * PROJECT      : SENG3020 - Milestone 2
+ * PROGRAMMERS  : Devin Caron, Cole Spehar, Isaiah Andrews, Dusan Sasic
+ * FIRST VERSON : 2021-11-09
+ * DESCRIPTION  : This program models a Ground Station Terminal that receives live data
  *               updates from an aircraft. It parses this data then displays it live.
  *               The program also allows you to pause the live data and search it.
  *				
