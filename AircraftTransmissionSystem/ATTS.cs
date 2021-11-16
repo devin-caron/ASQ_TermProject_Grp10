@@ -3,7 +3,9 @@
  * PROJECT      : SENG3020 - Milestone 2
  * PROGRAMMERS  : Devin Caron, Cole Spehar, Isaiah Andrews, Dusan Sasic
  * FIRST VERSON : 2021-11-09
- * DESCRIPTION  :  
+ * DESCRIPTION  : This file contains all of the functions for the ATTS (Aircraft Telemetry Transmission System).
+ *                The ATTS is responsible for reading all of the transmission data and transmitting it to the
+ *                Ground Station Terminal.
  */
 
 using System;
