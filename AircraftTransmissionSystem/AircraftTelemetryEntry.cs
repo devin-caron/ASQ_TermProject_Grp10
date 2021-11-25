@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace AircraftTransmissionSystem
 {
-    class AircraftTelemetryEntry {
+    public class AircraftTelemetryEntry {
         private DateTime timestamp;
         private float accelx = 0.0f;
         private float accely = 0.0f;
@@ -65,7 +65,6 @@ namespace AircraftTransmissionSystem
           PARAMETERS: String telemetryLnStr : A single line from the airplane's state file.
           RETURNS: void
         */
-        //TODO: add test that determines that this function parses correctly
         private void parseTelemetryLn(String telemetryLnStr) {
             //7_8_2018 19:34:3,-0.319754, -0.716176, 1.797150, 2154.670410, 1643.844116, 0.022278, 0.033622,
             String[] subStrings = telemetryLnStr.Split(',');
@@ -87,7 +86,6 @@ namespace AircraftTransmissionSystem
           PARAMETERS: String strTimeStamp : The string time stamp.
           RETURNS: DateTime : The proper DateTime object, set with the timestamp from the data.
         */
-        //TODO: add test that detemines if this function creates correct timestamps
         private DateTime convertStringTimeToDateTime(String strTimeStamp) {
             //7_8_2018 19:34:3
 
@@ -120,7 +118,6 @@ namespace AircraftTransmissionSystem
           PARAMETERS: void
           RETURNS: String : Representation of this object as line from the original aircraft data text file.
         */
-        //TODO: add test to verify that this funciton can make an exact replica of the string that was passed into this object's constructor (excluding the datetime field) 
         public override String ToString() {
             StringBuilder sb = new StringBuilder();
 

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace AircraftTransmissionSystem
 {
-    class FlightData
+    public class FlightData
     {
         private List<AircraftTelemetryEntry> telemetryList = new List<AircraftTelemetryEntry>();
         private String flightName = "";
@@ -62,7 +62,7 @@ namespace AircraftTransmissionSystem
           RETURNS: String : A 'cleaned', read: with no superflous symbols, string.
         */
         //TODO: Make sure this funciton can handle varying flight names
-        private String cleanName(String dirtyName) { 
+        public String cleanName(String dirtyName) { 
             char[] dirtyNameArray = dirtyName.ToCharArray();
             char[] cleanNameArray = {'A','A','A','A','A','A'};
 

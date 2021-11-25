@@ -21,9 +21,9 @@ using System.Threading.Tasks;
 
 namespace AircraftTransmissionSystem
 {
-    class ATTS {
-        private static List<FlightData> flights = new List<FlightData>();
-        private static bool bDataRetrieved = false;
+    public class ATTS {
+        public static List<FlightData> flights = new List<FlightData>();
+        public static bool bDataRetrieved = false;
 
         static void Main(string[] args) {
            int menuOption = 0; 
@@ -81,7 +81,7 @@ namespace AircraftTransmissionSystem
           PARAMETERS: void
           RETURNS: void
         */
-        static void readTelemetry() {
+        public static void readTelemetry() {
             String[] filePaths;
             String flightDir = Path.GetFullPath(Path.Combine(@"..\..\..\AircraftTransmissionData\"));
 
@@ -102,7 +102,7 @@ namespace AircraftTransmissionSystem
           PARAMETERS: String path : The path to file to be read.
           RETURNS: FlightData : An FlightData object that contains all of the flight data from the file.
         */
-        static FlightData readFile(String path) {
+        public static FlightData readFile(String path) {
             String flightFilename = path.Substring(path.LastIndexOf('\\'));
             FlightData fd = new FlightData(flightFilename);
             
@@ -254,7 +254,7 @@ namespace AircraftTransmissionSystem
             AircraftTelemetryEntry currentEntry : The object containing all of the data for the current set of state data being transmitted.
           RETURNS: String : The packetized data ready to be transmitted.
         */
-        static String packetize(String flightName, AircraftTelemetryEntry currentEntry) {
+        public static String packetize(String flightName, AircraftTelemetryEntry currentEntry) {
           StringBuilder sb = new StringBuilder();
 
                 sb.Append(flightName + @"|");
