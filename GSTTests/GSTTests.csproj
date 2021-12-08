@@ -56,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AircraftTransmissionSystem\AircraftTransmissionSystem.csproj">
+      <Project>{ec794aaf-006b-4ce1-b786-f8c9d2b99fc9}</Project>
+      <Name>AircraftTransmissionSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ASQ_TermProject_Grp10\GroundStationTerminal.csproj">
       <Project>{5a400e08-35b4-48b3-9e8b-f1fe5e0a367b}</Project>
       <Name>GroundStationTerminal</Name>
