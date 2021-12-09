@@ -24,5 +24,11 @@ namespace GSTTests
 
             Assert.AreEqual(data, expectedFirstPacketStr);
         }
+
+        [TestMethod]
+        public void test()
+        {
+
+        }
     }
 }
