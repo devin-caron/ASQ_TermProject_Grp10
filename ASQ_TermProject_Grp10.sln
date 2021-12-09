@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSTTests", "GSTTests\GSTTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDMScommonLib", "FDMScommonLib\FDMScommonLib.csproj", "{A257DE9A-EA65-41B7-A7E2-D9D1DC568E2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Tests", "Database.Tests\Database.Tests.csproj", "{7548EAFF-21D8-4954-9FBB-5797AD908571}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Test", "Database.Test\Database.Test.csproj", "{F09CA24C-CDD1-42BC-BAF4-0D873006DEBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{A257DE9A-EA65-41B7-A7E2-D9D1DC568E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A257DE9A-EA65-41B7-A7E2-D9D1DC568E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A257DE9A-EA65-41B7-A7E2-D9D1DC568E2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7548EAFF-21D8-4954-9FBB-5797AD908571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7548EAFF-21D8-4954-9FBB-5797AD908571}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7548EAFF-21D8-4954-9FBB-5797AD908571}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7548EAFF-21D8-4954-9FBB-5797AD908571}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F09CA24C-CDD1-42BC-BAF4-0D873006DEBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F09CA24C-CDD1-42BC-BAF4-0D873006DEBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F09CA24C-CDD1-42BC-BAF4-0D873006DEBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F09CA24C-CDD1-42BC-BAF4-0D873006DEBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
