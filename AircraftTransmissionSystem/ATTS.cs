@@ -18,6 +18,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FDMScommonLib;
 
 namespace AircraftTransmissionSystem
 {
@@ -116,7 +117,7 @@ namespace AircraftTransmissionSystem
                             break; 
                         }
 
-                        AircraftTelemetryEntry newEntry = new AircraftTelemetryEntry(ln);
+                        AircraftTelemetryEntry newEntry = new AircraftTelemetryEntry(ln, "");
                         fd.addEntry(newEntry);
                     }
                 }

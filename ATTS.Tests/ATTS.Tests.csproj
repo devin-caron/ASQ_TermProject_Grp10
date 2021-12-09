@@ -62,6 +62,10 @@
       <Project>{ec794aaf-006b-4ce1-b786-f8c9d2b99fc9}</Project>
       <Name>AircraftTransmissionSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FDMScommonLib\FDMScommonLib.csproj">
+      <Project>{a257de9a-ea65-41b7-a7e2-d9d1dc568e2f}</Project>
+      <Name>FDMScommonLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

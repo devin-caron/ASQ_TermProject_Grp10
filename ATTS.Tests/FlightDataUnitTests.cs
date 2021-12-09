@@ -2,6 +2,7 @@
 using AircraftTransmissionSystem;
 using System;
 using System.Linq;
+using FDMScommonLib;
 
 namespace ATTS.Tests {
     [TestClass]

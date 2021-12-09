@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATTS.Tests", "ATTS.Tests\AT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSTTests", "GSTTests\GSTTests.csproj", "{2D9F460E-6C2E-43BB-83FE-FBE37FF4A78A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDMScommonLib", "FDMScommonLib\FDMScommonLib.csproj", "{A257DE9A-EA65-41B7-A7E2-D9D1DC568E2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2D9F460E-6C2E-43BB-83FE-FBE37FF4A78A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D9F460E-6C2E-43BB-83FE-FBE37FF4A78A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D9F460E-6C2E-43BB-83FE-FBE37FF4A78A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A257DE9A-EA65-41B7-A7E2-D9D1DC568E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A257DE9A-EA65-41B7-A7E2-D9D1DC568E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A257DE9A-EA65-41B7-A7E2-D9D1DC568E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A257DE9A-EA65-41B7-A7E2-D9D1DC568E2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

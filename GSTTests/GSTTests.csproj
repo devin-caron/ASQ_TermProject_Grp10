@@ -64,6 +64,10 @@
       <Project>{5a400e08-35b4-48b3-9e8b-f1fe5e0a367b}</Project>
       <Name>GroundStationTerminal</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FDMScommonLib\FDMScommonLib.csproj">
+      <Project>{a257de9a-ea65-41b7-a7e2-d9d1dc568e2f}</Project>
+      <Name>FDMScommonLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

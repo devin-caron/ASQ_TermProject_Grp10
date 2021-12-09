@@ -1,24 +1,14 @@
-﻿/*
- * FILE         : AircraftTelemetryEntry.cs
- * PROJECT      : SENG3020 - Milestone 2
- * PROGRAMMERS  : Devin Caron, Cole Spehar, Isaiah Andrews, Dusan Sasic
- * FIRST VERSON : 2021-11-09
- * DESCRIPTION  : This file contains the class for the AircraftTelemetryEntry object.
- *                This object contains all of the airplane's state data.
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AircraftTransmissionSystem
+namespace FDMScommonLib
 {
     public class AircraftTelemetryEntry {
         private DateTime timestamp;
+        private String tailCode = "";
         private float accelx = 0.0f;
         private float accely = 0.0f;
         private float accelz = 0.0f;
@@ -35,15 +25,15 @@ namespace AircraftTransmissionSystem
           PARAMETERS: String telemetryLnStr: String representing the aircraft's state.
           RETURNS: void
         */
-        public AircraftTelemetryEntry(String telemetryLnStr) {
+        public AircraftTelemetryEntry(String telemetryLnStr, String flightName) {
 
             if (telemetryLnStr == " ") {
                 return;
             }
 
+            tailCode = flightName;
             parseTelemetryLn(telemetryLnStr);
-        }
-        
+        }        
         /*
           FUNCTION: calcChkSum()
           DESCRIPTION: This function calculates the check sum using the data stored in this object.
@@ -129,6 +119,7 @@ namespace AircraftTransmissionSystem
         }
 
         public DateTime Timestamp => timestamp;
+        public String TailCode => tailCode;
         public float Accelx => accelx;
         public float Accely => accely;
         public float Accelz => accelz;
@@ -136,5 +127,75 @@ namespace AircraftTransmissionSystem
         public float Altitude => altitude;
         public float Pitch => pitch;
         public float Bank => bank;
+    }
+
+    public class FlightData
+    {
+        private List<AircraftTelemetryEntry> telemetryList = new List<AircraftTelemetryEntry>();
+        private String flightName = "";
+
+        /*
+          FUNCTION: FlightData() - CONSTRUCTOR
+          DESCRIPTION: This constructor cleans the flight name, and constructs the object.
+          PARAMETERS: String name : The tail code of the airplane where the date is coming from.
+          RETURNS: void
+        */
+        public FlightData(String name) {
+            flightName = cleanName(name);
+        }
+
+        /*
+          FUNCTION: getEntry()
+          DESCRIPTION: This function returns the AircraftTransmissionEntry at the given index.
+          PARAMETERS: int index : The requested index.
+          RETURNS: AircraftTelemetryEntry : The requested AircraftTelemetryEntry.
+        */ 
+        public AircraftTelemetryEntry getEntry(int index) {
+            if (index > telemetryList.Count) {
+                AircraftTelemetryEntry ret = null;
+                return ret;
+            }
+
+            return telemetryList[index];
+        }
+
+        /*
+          FUNCTION: addEntry()
+          DESCRIPTION: This function 
+          PARAMETERS: The function takes an AircraftTelemetryEntry object and adds it to the telemetryList.
+          RETURNS: void
+        */
+        public void addEntry(AircraftTelemetryEntry entry) {
+            telemetryList.Add(entry);
+        }
+
+        /*
+          FUNCTION: cleanName()
+          DESCRIPTION: This function 'cleans' the string containing the airplane tail code.
+          PARAMETERS: String dirtyName : The 'dirty name' to be cleaned.
+          RETURNS: String : A 'cleaned', read: with no superflous symbols, string.
+        */
+        //TODO: Make sure this funciton can handle varying flight names
+        public String cleanName(String dirtyName) { 
+            char[] dirtyNameArray = dirtyName.ToCharArray();
+            char[] cleanNameArray = {'A','A','A','A','A','A'};
+
+            try {
+                for (int i = 0; i < dirtyName.IndexOf('.') - 1; i++) {
+                    cleanNameArray[i] = dirtyNameArray[dirtyName.LastIndexOf('\\') + i + 1];
+                }
+            }
+            catch(IndexOutOfRangeException ie) {
+               Console.WriteLine("cleanName() hit an index out of range exception!"); 
+            }
+
+            return (new String(cleanNameArray));
+        }
+
+        public List<AircraftTelemetryEntry> TelemetryList {
+            get => telemetryList;
+            set => telemetryList = value;
+        }
+        public string FlightName => flightName;
     }
 }

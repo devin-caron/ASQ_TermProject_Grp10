@@ -2,12 +2,13 @@
 using AircraftTransmissionSystem;
 using System;
 using System.Linq;
+using FDMScommonLib;
 
 namespace ATTS.Tests {
     [TestClass]
     public class TelemetryEntryTests {
         public static String entryStr = "7_8_2018 19:34:4,0.257793, -0.141772, 2.658766, 2154.66, 1630.865, 0.031823, 0.034561,";
-        public static AircraftTelemetryEntry entry = new AircraftTelemetryEntry(entryStr);
+        public static AircraftTelemetryEntry entry = new AircraftTelemetryEntry(entryStr, "");
 
         [TestMethod]
         public void Constructor_FieldsShouldPopulateCorrectly() {

@@ -13,13 +13,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
-using AircraftTransmissionSystem;
 using System.Threading;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Linq;
 using Microsoft.Win32;
+using FDMScommonLib;
 
 namespace ASQ_TermProject_Grp10
 {
