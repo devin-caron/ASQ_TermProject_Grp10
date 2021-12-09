@@ -36,7 +36,7 @@ namespace GSTTests
             AircraftTelemetryEntry entry = new AircraftTelemetryEntry(splitPacket[1], splitPacket[0]);
             testList.Add(entry);
 
-            Assert.AreEqual(splitPacket[0], entry);
+            Assert.AreEqual(testList[0], entry);
         }
 
         [TestMethod]
