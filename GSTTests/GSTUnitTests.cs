@@ -42,13 +42,17 @@ namespace GSTTests
         [TestMethod]
         public void GST_CanVerifyChecksum()
         {
+            String data = "C-FGAX|7_8_2018 19:34:3,-0.319754,-0.716176,1.79715,2154.67,1643.844,0.022278,0.033622,|548";
+            String[] splitPacket = data.Split('|');
 
-        }
+            List<AircraftTelemetryEntry> testList = new List<AircraftTelemetryEntry>();
 
-        [TestMethod]
-        public void GST_PrintsCorrectDataToASCII()
-        {
+            AircraftTelemetryEntry entry = new AircraftTelemetryEntry(splitPacket[1], splitPacket[0]);
+            testList.Add(entry);
 
+            Assert.AreEqual(testList[0], entry);
+
+            Assert.AreEqual(entry.calcChkSum(), int.Parse(splitPacket[2]));
         }
     }
 }
