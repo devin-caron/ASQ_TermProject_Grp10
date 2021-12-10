@@ -46,6 +46,7 @@
                     />
 
             <DataGrid x:FieldModifier="public" AutoGenerateColumns="True" x:Name="liveDataGrid"
+                      CanUserSortColumns="False"
                       HorizontalAlignment="Right"
                       VerticalContentAlignment="Top"
                       Width="679"

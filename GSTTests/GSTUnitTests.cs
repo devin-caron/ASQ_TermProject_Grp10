@@ -52,7 +52,7 @@ namespace GSTTests
 
             Assert.AreEqual(testList[0], entry);
 
-            Assert.AreEqual(entry.calcChkSum(), int.Parse(splitPacket[2]));
+            Assert.AreEqual(entry.calcChkSum(), 548);
         }
     }
 }
