@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace FDMScommonLib
-{
+namespace FDMScommonLib {
     public class AircraftTelemetryEntry {
         private DateTime timestamp;
         private String tailCode = "";
@@ -33,7 +30,7 @@ namespace FDMScommonLib
 
             tailCode = flightName;
             parseTelemetryLn(telemetryLnStr);
-        }        
+        }
         /*
           FUNCTION: calcChkSum()
           DESCRIPTION: This function calculates the check sum using the data stored in this object.
@@ -58,7 +55,7 @@ namespace FDMScommonLib
         private void parseTelemetryLn(String telemetryLnStr) {
             //7_8_2018 19:34:3,-0.319754, -0.716176, 1.797150, 2154.670410, 1643.844116, 0.022278, 0.033622,
             String[] subStrings = telemetryLnStr.Split(',');
-            
+
             timestamp = convertStringTimeToDateTime(subStrings[0]);
             accelx = float.Parse(subStrings[1]);
             accely = float.Parse(subStrings[2]);
@@ -81,8 +78,8 @@ namespace FDMScommonLib
 
             char[] properStringFormat = strTimeStamp.ToCharArray();
 
-            int firstUnderscore = strTimeStamp.IndexOf('_',0);
-            int secondUnderscore = strTimeStamp.IndexOf('_',firstUnderscore +1);
+            int firstUnderscore = strTimeStamp.IndexOf('_', 0);
+            int secondUnderscore = strTimeStamp.IndexOf('_', firstUnderscore + 1);
 
             properStringFormat[firstUnderscore] = '/';
             properStringFormat[secondUnderscore] = '/';
@@ -111,7 +108,7 @@ namespace FDMScommonLib
         public override String ToString() {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(convertDateTimeToString(timestamp) +  @",");
+            sb.Append(convertDateTimeToString(timestamp) + @",");
             sb.Append(accelx + @"," + accely + @"," + accelz + @",");
             sb.Append(weight + @"," + altitude + @"," + pitch + @"," + bank + @",");
 
@@ -129,8 +126,7 @@ namespace FDMScommonLib
         public float Bank => bank;
     }
 
-    public class FlightData
-    {
+    public class FlightData {
         private List<AircraftTelemetryEntry> telemetryList = new List<AircraftTelemetryEntry>();
         private String flightName = "";
 
@@ -149,7 +145,7 @@ namespace FDMScommonLib
           DESCRIPTION: This function returns the AircraftTransmissionEntry at the given index.
           PARAMETERS: int index : The requested index.
           RETURNS: AircraftTelemetryEntry : The requested AircraftTelemetryEntry.
-        */ 
+        */
         public AircraftTelemetryEntry getEntry(int index) {
             if (index > telemetryList.Count) {
                 AircraftTelemetryEntry ret = null;
@@ -176,17 +172,17 @@ namespace FDMScommonLib
           RETURNS: String : A 'cleaned', read: with no superflous symbols, string.
         */
         //TODO: Make sure this funciton can handle varying flight names
-        public String cleanName(String dirtyName) { 
+        public String cleanName(String dirtyName) {
             char[] dirtyNameArray = dirtyName.ToCharArray();
-            char[] cleanNameArray = {'A','A','A','A','A','A'};
+            char[] cleanNameArray = { 'A', 'A', 'A', 'A', 'A', 'A' };
 
             try {
                 for (int i = 0; i < dirtyName.IndexOf('.') - 1; i++) {
                     cleanNameArray[i] = dirtyNameArray[dirtyName.LastIndexOf('\\') + i + 1];
                 }
             }
-            catch(IndexOutOfRangeException ie) {
-               Console.WriteLine("cleanName() hit an index out of range exception!"); 
+            catch (IndexOutOfRangeException ie) {
+                Console.WriteLine("cleanName() hit an index out of range exception!");
             }
 
             return (new String(cleanNameArray));

@@ -1,10 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AircraftTransmissionSystem;
-using System;
-using System.Linq;
-using FDMScommonLib;
-
-namespace ATTS.Tests {
+﻿namespace ATTS.Tests {
     [TestClass]
     public class FlightDataUnitTests {
 

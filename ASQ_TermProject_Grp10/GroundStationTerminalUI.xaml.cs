@@ -9,33 +9,30 @@
  *				
  */
 
+using FDMScommonLib;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Threading;
-using System.Net;
-using System.Net.Sockets;
 using System.IO;
 using System.Linq;
-using Microsoft.Win32;
-using FDMScommonLib;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
+using System.Windows;
 
-namespace ASQ_TermProject_Grp10
-{
+namespace ASQ_TermProject_Grp10 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class GroundStationTerminalUI : Window
-    {
+    public partial class GroundStationTerminalUI : Window {
         private volatile bool liveData = true;
         private List<AircraftTelemetryEntry> liveList = new List<AircraftTelemetryEntry>();
         private List<AircraftTelemetryEntry> pausedList = new List<AircraftTelemetryEntry>();
         private Thread listener;
         public static string data = null;
 
-        public GroundStationTerminalUI()
-        {
+        public GroundStationTerminalUI() {
             InitializeComponent();
 
             // Set defaults
@@ -55,8 +52,7 @@ namespace ASQ_TermProject_Grp10
         //                live display.
         // PARAMETERS   : object o :  
         // RETURNS      : void
-        private void ReceiveTransmission(object o)
-        {
+        private void ReceiveTransmission(object o) {
             // Data buffer for incoming data.  
             byte[] bytes = new Byte[1024];
 
@@ -74,14 +70,12 @@ namespace ASQ_TermProject_Grp10
 
             // Bind the socket to the local endpoint and
             // listen for incoming connections.  
-            try
-            {
+            try {
                 listener.Bind(localEndPoint);
                 listener.Listen(10);
 
                 // Start listening for connections.  
-                while (true)
-                {
+                while (true) {
                     Console.WriteLine("[INFO] Waiting for a connection...");
                     // Program is suspended while waiting for an incoming connection.  
                     Socket handler = listener.Accept();
@@ -90,18 +84,15 @@ namespace ASQ_TermProject_Grp10
                     data = null;
 
                     // An incoming connection needs to be processed.  
-                    while (true)
-                    {
+                    while (true) {
                         // C-FGAX|7_8_2018 19:36:34,-6E-06,-0.001649,-0.0008482153.744,605.7504,-0.028133,5.6E-05,|202
                         int bytesRec = handler.Receive(bytes);
                         data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
 
-                        if (data.IndexOf("<EOF>") > -1)
-                        {
+                        if (data.IndexOf("<EOF>") > -1) {
                             break;
                         }
-                        else if (data.IndexOf("<EOT>") > -1)
-                        {
+                        else if (data.IndexOf("<EOT>") > -1) {
                             break;
                         }
 
@@ -111,8 +102,7 @@ namespace ASQ_TermProject_Grp10
                         AircraftTelemetryEntry entry = new AircraftTelemetryEntry(splitPacket[1], splitPacket[0]);
 
                         // Verify CheckSum
-                        if (entry.calcChkSum() == int.Parse(splitPacket[2]))
-                        {
+                        if (entry.calcChkSum() == int.Parse(splitPacket[2])) {
                             //Sends acknowledgment data to ATTS   
                             byte[] msg = Encoding.ASCII.GetBytes("<ACK>");
                             handler.Send(msg);
@@ -122,8 +112,7 @@ namespace ASQ_TermProject_Grp10
                         }
 
                         // If live data is on update the datagrid
-                        if (liveData)
-                        {
+                        if (liveData) {
                             UpdateDataGrid(liveList);
 
                             // Update database function call
@@ -140,8 +129,7 @@ namespace ASQ_TermProject_Grp10
                     handler.Close();
                 }
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 Console.WriteLine(e.ToString());
             }
         }
@@ -151,11 +139,9 @@ namespace ASQ_TermProject_Grp10
         //                object and updates the datagrid with it.
         // PARAMETERS   : List<AircraftTelemetryEntry> data : stores aircraft data
         // RETURNS      : void
-        private void UpdateDataGrid(List<AircraftTelemetryEntry> data)
-        {
+        private void UpdateDataGrid(List<AircraftTelemetryEntry> data) {
             // Display updated list to datagrid
-            this.Dispatcher.Invoke(() =>
-            {
+            this.Dispatcher.Invoke(() => {
                 liveDataGrid.ItemsSource = data;
                 liveDataGrid.Items.Refresh();
             });
@@ -169,8 +155,7 @@ namespace ASQ_TermProject_Grp10
         // PARAMETERS   : object sender
         //                RoutedEventArgs e
         // RETURNS      : void
-        private void AsciiBtn_Click(object sender, RoutedEventArgs e)
-        {
+        private void AsciiBtn_Click(object sender, RoutedEventArgs e) {
 
             // Setup save file dialog
             SaveFileDialog save = new SaveFileDialog();
@@ -178,13 +163,11 @@ namespace ASQ_TermProject_Grp10
             save.Filter = "Text File | *.txt";
 
             // Verify save was pressed
-            if (save.ShowDialog() == true)
-            {
+            if (save.ShowDialog() == true) {
                 // Start streamwriter and transfer data to txt file
                 StreamWriter writer = new StreamWriter(save.OpenFile());
 
-                foreach (var item in pausedList)
-                {
+                foreach (var item in pausedList) {
                     writer.WriteLine(string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}", item.Timestamp, item.Accelx.ToString(), item.Accely.ToString(), item.Accelz.ToString(),
                         item.Weight.ToString(), item.Altitude.ToString(), item.Pitch.ToString(), item.Bank.ToString()));
                 }
@@ -203,10 +186,8 @@ namespace ASQ_TermProject_Grp10
         //                buttons.
         // PARAMETERS   : object sender, RoutedEventArgs e 
         // RETURNS      : void
-        private void LiveDataBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (liveData)
-            {
+        private void LiveDataBtn_Click(object sender, RoutedEventArgs e) {
+            if (liveData) {
                 // Stop Live Data
                 pausedList = new List<AircraftTelemetryEntry>(liveList);
                 liveData = false;
@@ -215,8 +196,7 @@ namespace ASQ_TermProject_Grp10
                 searchBtn.IsEnabled = true;
                 liveTxt.Text = "OFF";
             }
-            else
-            {
+            else {
                 // Start Live Data
                 UpdateDataGrid(liveList);
                 liveData = true;
@@ -236,57 +216,45 @@ namespace ASQ_TermProject_Grp10
         //                to display all the data again.
         // PARAMETERS   : object sender, RoutedEventArgs e 
         // RETURNS      : void
-        private void SearchBtn_Click(object sender, RoutedEventArgs e)
-        {
+        private void SearchBtn_Click(object sender, RoutedEventArgs e) {
             string searchValue = dataSearch.Text;
 
             // Search by column selected
-            if (dataSearch.Text != "")
-            {
+            if (dataSearch.Text != "") {
                 var filtered = pausedList.Where(flightData => flightData.Timestamp.ToString().Contains(dataSearch.Text));
                 string selItem = searchCB.Text;
 
-                if (selItem == "timestamp")
-                {
+                if (selItem == "timestamp") {
                     filtered = pausedList.Where(flightData => flightData.Timestamp.ToString().Contains(dataSearch.Text));
                 }
-                else if (selItem == "tailCode")
-                {
+                else if (selItem == "tailCode") {
                     filtered = pausedList.Where(FlightData => FlightData.TailCode.ToString().Contains(dataSearch.Text));
                 }
-                else if (selItem == "accelx")
-                {
+                else if (selItem == "accelx") {
                     filtered = pausedList.Where(flightData => flightData.Accelx.ToString().Contains(dataSearch.Text));
                 }
-                else if (selItem == "accely")
-                {
+                else if (selItem == "accely") {
                     filtered = pausedList.Where(flightData => flightData.Accely.ToString().Contains(dataSearch.Text));
                 }
-                else if (selItem == "accelz")
-                {
+                else if (selItem == "accelz") {
                     filtered = pausedList.Where(flightData => flightData.Accelz.ToString().Contains(dataSearch.Text));
                 }
-                else if (selItem == "weight")
-                {
+                else if (selItem == "weight") {
                     filtered = pausedList.Where(flightData => flightData.Weight.ToString().Contains(dataSearch.Text));
                 }
-                else if (selItem == "altitude")
-                {
+                else if (selItem == "altitude") {
                     filtered = pausedList.Where(flightData => flightData.Altitude.ToString().Contains(dataSearch.Text));
                 }
-                else if (selItem == "pitch")
-                {
+                else if (selItem == "pitch") {
                     filtered = pausedList.Where(flightData => flightData.Pitch.ToString().Contains(dataSearch.Text));
                 }
-                else if (selItem == "bank")
-                {
+                else if (selItem == "bank") {
                     filtered = pausedList.Where(flightData => flightData.Bank.ToString().Contains(dataSearch.Text));
                 }
 
                 liveDataGrid.ItemsSource = filtered;
             }
-            else
-            {
+            else {
                 // Display full list
                 UpdateDataGrid(pausedList);
             }

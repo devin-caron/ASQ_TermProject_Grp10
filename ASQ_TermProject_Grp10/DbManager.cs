@@ -1,49 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using ASQ_TermProject_Grp10;
+using System.Data.SqlClient;
 
 
-namespace ASQ_TermProject_Grp10
-{
-    class DbManager
-    {
+namespace ASQ_TermProject_Grp10 {
+    class DbManager {
 
         private SqlConnection conn;
 
-        public DbManager()
-        {
+        public DbManager() {
             conn = new SqlConnection();
             conn.ConnectionString = ConfigurationManager.ConnectionStrings["ConString"].ConnectionString;
         }
 
 
-        public void InserAttitudeParameters(string aircraftID, string timestamp, double altitude, double pitch, double bank)
-        {
+        public void InserAttitudeParameters(string aircraftID, string timestamp, double altitude, double pitch, double bank) {
             SqlCommand cmd = null;
 
-            try
-            {
+            try {
                 conn.Open();
 
                 cmd = new SqlCommand();
                 cmd.CommandText = "INSERT INTO[dbo].[AttitudeParameters]([AircraftID],[Timestamp],[Altitude],[Pitch],[Bank]) " +
-                    "VALUES('"+aircraftID+"','"+timestamp+"',"+altitude+","+pitch+","+bank+")";
+                    "VALUES('" + aircraftID + "','" + timestamp + "'," + altitude + "," + pitch + "," + bank + ")";
                 cmd.Connection = conn;
                 cmd.ExecuteNonQuery();
-                
+
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 Console.WriteLine(e.ToString());
             }
-            finally
-            {
+            finally {
                 if (conn.State == ConnectionState.Open)
                     conn.Close();
             }
@@ -52,44 +40,38 @@ namespace ASQ_TermProject_Grp10
 
 
 
-        public void InsertGForceParameters(string aircraftID, string timestamp, double x, double y, double z, double weight)
-        {
+        public void InsertGForceParameters(string aircraftID, string timestamp, double x, double y, double z, double weight) {
             SqlCommand cmd = null;
 
 
-            
-            try
-            {
+
+            try {
                 conn.Open();
 
                 cmd = new SqlCommand();
                 cmd.CommandText = "INSERT INTO[dbo].[GForceParameters]([AircraftID],[Timestamp],[AccelX],[AccelY],[AccelZ],[Weight]) " +
-                    "VALUES('" + aircraftID + "','" + timestamp + "'," + x + "," + y + "," + z + ", "+weight+")";
+                    "VALUES('" + aircraftID + "','" + timestamp + "'," + x + "," + y + "," + z + ", " + weight + ")";
                 cmd.Connection = conn;
                 cmd.ExecuteNonQuery();
 
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 Console.WriteLine(e.ToString());
             }
-            finally
-            {
+            finally {
                 if (conn.State == ConnectionState.Open)
                     conn.Close();
             }
         }
 
-        public DataTable ReadFromDb(string tblName)
-        {
+        public DataTable ReadFromDb(string tblName) {
 
             SqlCommand cmd = null;
             SqlDataAdapter da = null;
             DataTable dt = null;
 
 
-            try
-            {
+            try {
                 conn.Open();
 
                 cmd = new SqlCommand();
@@ -102,12 +84,10 @@ namespace ASQ_TermProject_Grp10
 
 
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 Console.WriteLine(e.ToString());
             }
-            finally
-            {
+            finally {
                 if (conn.State == ConnectionState.Open)
                     conn.Close();
             }
